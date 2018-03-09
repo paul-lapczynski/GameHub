@@ -11,5 +11,7 @@ namespace LanPartyHub.Models.Doom
         public string Name { get; set; }
 
         public List<DoomEpisode> Episodes { get; set; }
+
+        public List<DoomSkillLevel> SkillLevels { get; set; }
     }
 }

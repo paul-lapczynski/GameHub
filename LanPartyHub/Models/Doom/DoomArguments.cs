@@ -10,14 +10,24 @@ namespace LanPartyHub.Models.Doom
     {
         public int? NumberOfPlayers { get; set; }
 
-        public bool? IsServer { get; set; }
-
         public string StartLevel { get; set; }
-
-        public int? ServerPortNumber { get; set; }
 
         public string CustomWAD { get; set; }
 
         public bool? Multiplayer { get; set; }
+
+        public bool? Deathmath { get; set; }
+
+        public int? Timer { get; set; }
+
+        public bool? UseTimer { get; set; }
+
+        public bool? Turbo { get; set; }
+
+        public int TurboPercentage { get; set; }
+
+        public bool? Altdeath { get; set; }
+
+        public string SkillLevel { get; set; }
     }
 }

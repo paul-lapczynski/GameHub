@@ -78,13 +78,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\DoomInfoManager.cs" />
+    <Compile Include="Managers\DoomManager.cs" />
     <Compile Include="Managers\DOSBoxManager.cs" />
     <Compile Include="Models\Doom\DoomArguments.cs" />
     <Compile Include="Models\Doom\DoomEpisode.cs" />
     <Compile Include="Models\Doom\DoomGame.cs" />
     <Compile Include="Models\Doom\DoomInfo.cs" />
     <Compile Include="Models\Doom\DoomLevel.cs" />
+    <Compile Include="Models\Doom\DoomSkillLevel.cs" />
     <Compile Include="Models\DOSBox\DOSBoxOptions.cs" />
     <Compile Include="Models\KeyValuePair.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -140,6 +141,9 @@
     <EmbeddedResource Include="Content\DOSBox\SDL_net.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Doom_for_95_launcher.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

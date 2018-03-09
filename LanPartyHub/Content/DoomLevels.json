@@ -2,146 +2,168 @@
     "Games": [
         {
             "Name": "Doom II",
-            "Episodes": [
+          "Episodes": [
+            {
+              "Name": "The Space Station",
+              "Number": 1,
+              "Levels": [
                 {
-                    "Name": "The Space Station",
-                    "Number": 1,
-                    "Levels": [
-                        {
-                            "Number": 1,
-                            "Name": "EntryWay"
-                        },
-                        {
-                            "Number": 2,
-                            "Name": "Underhalls"
-                        },
-                        {
-                            "Number": 3,
-                            "Name": "The Gantlet"
-                        },
-                        {
-                            "Number": 4,
-                            "Name": "The Focus"
-                        },
-                        {
-                            "Number": 5,
-                            "Name": "The Waste Tunnels"
-                        },
-                        {
-                            "Number": 6,
-                            "Name": "The Crusher"
-                        },
-                        {
-                            "Number": 7,
-                            "Name": "Dead Simple"
-                        },
-                        {
-                            "Number": 8,
-                            "Name": "Tricks and Traps"
-                        },
-                        {
-                            "Number": 9,
-                            "Name": "The Pit"
-                        },
-                        {
-                            "Number": 10,
-                            "Name": "Refueling Base"
-                        },
-                        {
-                            "Number": 11,
-                            "Name": "'O' of Destruction!"
-                        }
-                    ]
+                  "Number": 1,
+                  "Name": "EntryWay"
                 },
                 {
-                    "Name": "The City",
-                    "Number": 2,
-                    "Levels": [
-                        {
-                            "Number": 12,
-                            "Name": "The Factory"
-                        },
-                        {
-                            "Number": 13,
-                            "Name": "Downtown"
-                        },
-                        {
-                            "Number": 14,
-                            "Name": "The Inmost Dens"
-                        },
-                        {
-                            "Number": 15,
-                            "Name": "Industrial Zone "
-                        },
-                        {
-                            "Number": 16,
-                            "Name": "Suburbs"
-                        },
-                        {
-                            "Number": 17,
-                            "Name": "Tenements"
-                        },
-                        {
-                            "Number": 18,
-                            "Name": "The Courtyard"
-                        },
-                        {
-                            "Number": 19,
-                            "Name": "The Citadel"
-                        },
-                        {
-                            "Number": 20,
-                            "Name": "Gotcha!"
-                        }
-                    ]
+                  "Number": 2,
+                  "Name": "Underhalls"
                 },
                 {
-                    "Name": "Hell",
-                    "Number": 3,
-                    "Levels": [
-                        {
-                            "Number": 21,
-                            "Name": "Nirvana"
-                        },
-                        {
-                            "Number": 22,
-                            "Name": "The Catacombs"
-                        },
-                        {
-                            "Number": 23,
-                            "Name": "Barrels o' Fun"
-                        },
-                        {
-                            "Number": 24,
-                            "Name": "The Chasm"
-                        },
-                        {
-                            "Number": 25,
-                            "Name": "Bloodfalls"
-                        },
-                        {
-                            "Number": 26,
-                            "Name": "The Abandoned Mines"
-                        },
-                        {
-                            "Number": 27,
-                            "Name": "Monster Condo"
-                        },
-                        {
-                            "Number": 28,
-                            "Name": "The Spirit World"
-                        },
-                        {
-                            "Number": 29,
-                            "Name": "The Living End"
-                        },
-                        {
-                            "Number": 30,
-                            "Name": "Icon of Sin"
-                        }
-                    ]
+                  "Number": 3,
+                  "Name": "The Gantlet"
+                },
+                {
+                  "Number": 4,
+                  "Name": "The Focus"
+                },
+                {
+                  "Number": 5,
+                  "Name": "The Waste Tunnels"
+                },
+                {
+                  "Number": 6,
+                  "Name": "The Crusher"
+                },
+                {
+                  "Number": 7,
+                  "Name": "Dead Simple"
+                },
+                {
+                  "Number": 8,
+                  "Name": "Tricks and Traps"
+                },
+                {
+                  "Number": 9,
+                  "Name": "The Pit"
+                },
+                {
+                  "Number": 10,
+                  "Name": "Refueling Base"
+                },
+                {
+                  "Number": 11,
+                  "Name": "'O' of Destruction!"
                 }
-            ]
+              ]
+            },
+            {
+              "Name": "The City",
+              "Number": 2,
+              "Levels": [
+                {
+                  "Number": 12,
+                  "Name": "The Factory"
+                },
+                {
+                  "Number": 13,
+                  "Name": "Downtown"
+                },
+                {
+                  "Number": 14,
+                  "Name": "The Inmost Dens"
+                },
+                {
+                  "Number": 15,
+                  "Name": "Industrial Zone "
+                },
+                {
+                  "Number": 16,
+                  "Name": "Suburbs"
+                },
+                {
+                  "Number": 17,
+                  "Name": "Tenements"
+                },
+                {
+                  "Number": 18,
+                  "Name": "The Courtyard"
+                },
+                {
+                  "Number": 19,
+                  "Name": "The Citadel"
+                },
+                {
+                  "Number": 20,
+                  "Name": "Gotcha!"
+                }
+              ]
+            },
+            {
+              "Name": "Hell",
+              "Number": 3,
+              "Levels": [
+                {
+                  "Number": 21,
+                  "Name": "Nirvana"
+                },
+                {
+                  "Number": 22,
+                  "Name": "The Catacombs"
+                },
+                {
+                  "Number": 23,
+                  "Name": "Barrels o' Fun"
+                },
+                {
+                  "Number": 24,
+                  "Name": "The Chasm"
+                },
+                {
+                  "Number": 25,
+                  "Name": "Bloodfalls"
+                },
+                {
+                  "Number": 26,
+                  "Name": "The Abandoned Mines"
+                },
+                {
+                  "Number": 27,
+                  "Name": "Monster Condo"
+                },
+                {
+                  "Number": 28,
+                  "Name": "The Spirit World"
+                },
+                {
+                  "Number": 29,
+                  "Name": "The Living End"
+                },
+                {
+                  "Number": 30,
+                  "Name": "Icon of Sin"
+                }
+              ]
+            }
+          ],
+          "SkillLevels": [
+            {
+              "Skill": 1,
+              "Name": "I'm too young to die"
+            },
+            {
+              "Skill": 2,
+              "Name": "Hey, not too rough"
+            },
+            {
+              "Skill": 3,
+              "Name": "Hurt me plenty"
+            },
+            {
+              "Skill": 4,
+              "Name": "Ultra-Violence"
+            },
+            {
+              "Skill": 5,
+              "Name": "Nightmare!"
+            }
+          ]
         }
     ]
 }

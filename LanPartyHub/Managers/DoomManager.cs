@@ -10,11 +10,11 @@ using System.Windows;
 
 namespace LanPartyHub.Managers
 {
-    public class DoomInfoManager
+    public class DoomManager
     {
         public DoomInfo DoomInfo { get; }
 
-        public DoomInfoManager()
+        public DoomManager()
         {
             DoomInfo = GetDoomInfo();
         }
@@ -51,6 +51,30 @@ namespace LanPartyHub.Managers
             return list.ToList();
         }
 
+        public List<KeyValue> GetSkillLevelView()
+        {
+            var lvls = DoomInfo.Games[0].SkillLevels;
+            var list = from lvl in lvls
+                       select new KeyValue
+                       {
+                           Value = lvl.Name,
+                           Key = lvl.Skill
+                       };
+
+            return list.ToList();
+        }
+
+        public List<int> GetNumberOfPlayers()
+        {
+            var players = new List<int>();
+            for (var i = 1; i < 5; i++)
+            {
+                players.Add(i);
+            }
+
+            return players;
+        }
+
         public string GetDoomArguments(DoomArguments arguments)
         {
             var args = new StringBuilder();
@@ -58,6 +82,39 @@ namespace LanPartyHub.Managers
             if (!string.IsNullOrEmpty(arguments.StartLevel))
             {
                 args.Append($" -warp {arguments.StartLevel}");
+            }
+
+            if(arguments.Multiplayer.HasValue && arguments.Multiplayer.Value)
+            {
+                if (arguments.Altdeath.HasValue && arguments.Altdeath.Value)
+                {
+                    args.Append($" -altdeath");
+                }
+
+                if (arguments.Deathmath.HasValue && arguments.Deathmath.Value)
+                {
+                    args.Append($" -deathmatch");
+                }
+
+                if (arguments.NumberOfPlayers.HasValue)
+                {
+                    args.Append($" -nodes {arguments.NumberOfPlayers}");
+                }
+
+                if (arguments.Timer.HasValue)
+                {
+                    args.Append($" -timer {arguments.Timer.Value}");
+                }
+            }
+
+            if(arguments.Turbo.HasValue && arguments.Turbo.Value)
+            {
+                args.Append($" -turbo {arguments.TurboPercentage}");
+            }
+
+            if (!string.IsNullOrEmpty(arguments.SkillLevel))
+            {
+                args.Append($" -skill {arguments.SkillLevel}");
             }
 
             return args.ToString();

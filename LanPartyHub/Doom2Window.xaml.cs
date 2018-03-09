@@ -25,13 +25,13 @@ namespace LanPartyHub
     public partial class Doom2Window : Window
     {
         MainWindow _main;
-        DoomInfoManager doomInfoManager;
+        DoomManager doomManager;
         Process doom;
 
         public Doom2Window(MainWindow main)
         {
             _main = main;
-            doomInfoManager = new DoomInfoManager();
+            doomManager = new DoomManager();
             InitializeComponent();
             SetupCombos();
             Closed += Doom2Window_Closed;
@@ -52,29 +52,31 @@ namespace LanPartyHub
 
         private void EpisodeDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LevelDropdown.ItemsSource = doomInfoManager.GetLevelView(int.Parse(((KeyValue)EpisodeDropdown.SelectedItem).Key));
+            LevelDropdown.ItemsSource = doomManager.GetLevelView(int.Parse(((KeyValue)EpisodeDropdown.SelectedItem).Key));
         }
 
         private void StartDoom(object sender, RoutedEventArgs e)
         {
+
             doom = DOSBoxManager.StartDOSBox(new DOSBoxOptions
             {
                 ExeFolderPath = $"DOOMIIDO\\",
                 ExeName = "DOOM2.EXE",
                 Fullscreen = true,
-                Arguments = doomInfoManager.GetDoomArguments(new DoomArguments
+                Arguments = doomManager.GetDoomArguments(new DoomArguments
                 {
-                    StartLevel = ((KeyValue)LevelDropdown.SelectedItem).Key
+                    StartLevel = ((KeyValue)LevelDropdown.SelectedItem).Key,
+                    Turbo = TurboCheckbox.IsChecked,
+                    TurboPercentage = (int)Math.Floor(TurboSlider.Value),
+                    Multiplayer = MultiplayerCheckbox.IsChecked,
+                    Deathmath = DeathmatchCheckbox.IsChecked,
+                    Altdeath = WeaponReaspon.IsChecked,
+                    NumberOfPlayers = (int?)PlayersDropdown.SelectedValue,
+                    SkillLevel = (string)SkillLevelDropdown.SelectedValue,
+                    Timer = (int)Math.Floor(TimerSlider.Value),
+                    UseTimer = UseTimerCheckbox.IsChecked
                 })
             });
-
-            doom.Exited += Doom_Exited;
-            Hide();
-        }
-
-        private void Doom_Exited(object sender, EventArgs e)
-        {
-            Show();
         }
 
         private void SetupCombos()
@@ -83,9 +85,28 @@ namespace LanPartyHub
             EpisodeDropdown.SelectedValuePath = "Key";
             LevelDropdown.SelectedValuePath = "Key";
             LevelDropdown.DisplayMemberPath = "Value";
+            SkillLevelDropdown.DisplayMemberPath = "Value";
+            SkillLevelDropdown.SelectedValuePath = "Key";
 
-            EpisodeDropdown.ItemsSource = doomInfoManager.GetEpisodeView();
+            SkillLevelDropdown.ItemsSource = doomManager.GetSkillLevelView();
+            EpisodeDropdown.ItemsSource = doomManager.GetEpisodeView();
+            PlayersDropdown.ItemsSource = doomManager.GetNumberOfPlayers();
+        }
 
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(Minutes != null)
+            {
+                Minutes.Content = 10 - Math.Floor(e.NewValue) + " Minutes";
+            }
+        }
+
+        private void TurboSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(TurboPercentage != null)
+            {
+                TurboPercentage.Content = Math.Floor(e.NewValue) + "%";
+            }
         }
     }
 }

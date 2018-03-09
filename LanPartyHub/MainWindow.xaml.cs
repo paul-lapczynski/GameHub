@@ -24,8 +24,6 @@ namespace LanPartyHub
     {
         public MainWindow()
         {
-            IPAddress newaddress = IPAddress.Parse("10.0.0.85");
-
             InitializeComponent();
         }
 
