@@ -28,11 +28,13 @@ namespace LanPartyHub
         DoomManager doomManager;
         Process doom;
 
-        public Doom2Window(MainWindow main)
+        public Doom2Window(MainWindow main, int gameId)
         {
             _main = main;
-            doomManager = new DoomManager();
+            doomManager = new DoomManager(gameId);
+
             InitializeComponent();
+
             SetupCombos();
             Closed += Doom2Window_Closed;
         }
@@ -57,26 +59,7 @@ namespace LanPartyHub
 
         private void StartDoom(object sender, RoutedEventArgs e)
         {
-
-            doom = DOSBoxManager.StartDOSBox(new DOSBoxOptions
-            {
-                ExeFolderPath = $"DOOMIIDO\\",
-                ExeName = "DOOM2.EXE",
-                Fullscreen = true,
-                Arguments = doomManager.GetDoomArguments(new DoomArguments
-                {
-                    StartLevel = ((KeyValue)LevelDropdown.SelectedItem).Key,
-                    Turbo = TurboCheckbox.IsChecked,
-                    TurboPercentage = (int)Math.Floor(TurboSlider.Value),
-                    Multiplayer = MultiplayerCheckbox.IsChecked,
-                    Deathmath = DeathmatchCheckbox.IsChecked,
-                    Altdeath = WeaponReaspon.IsChecked,
-                    NumberOfPlayers = (int?)PlayersDropdown.SelectedValue,
-                    SkillLevel = (string)SkillLevelDropdown.SelectedValue,
-                    Timer = (int)Math.Floor(TimerSlider.Value),
-                    UseTimer = UseTimerCheckbox.IsChecked
-                })
-            });
+            doom = DOSBoxManager.StartDOSBox(doomManager.GetDOSBoxOptions(this));
         }
 
         private void SetupCombos()

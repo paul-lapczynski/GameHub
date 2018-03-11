@@ -1,12 +1,14 @@
 ﻿using LanPartyHub.Models.DOSBox;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
+using LanPartyHub.Properties;
 namespace LanPartyHub.Managers
 {
     /// <summary>
@@ -16,12 +18,12 @@ namespace LanPartyHub.Managers
     {
         private static readonly string exe = "DOSBox.exe";
         private static readonly string workingDirectory = Directory.GetCurrentDirectory() + @"\Content\DOSBox\";
-        private static readonly string DOSBoxC = "D:\\Games\\DOSBoxC\\";
+        private static readonly string DOSBoxC = ConfigurationManager.AppSettings.Get("DOSBoxC");
 
         public DOSBoxManager()
         {
         }
-
+       
         public static Process StartDOSBox(DOSBoxOptions options)
         {
             return Process.Start(new ProcessStartInfo

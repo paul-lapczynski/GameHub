@@ -1,0 +1,12 @@
+﻿{
+  "Games": [
+    {
+      "Name": "Doom 2",
+      "FolderPath": "doomiido\\",
+      "ExecutableName": "DOOM2.EXE",
+      "GameId": 1,
+      "ImagePath": "Images/Doom2_title.png"
+    }
+  ],
+  "VirtualDOSBoxCDrivePath": "D:\\Games\\DOSBoxC"
+}

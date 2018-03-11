@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanPartyHub.Managers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -29,8 +30,16 @@ namespace LanPartyHub
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var doomWindow = new Doom2Window(this);
-            App.Current.MainWindow = doomWindow;
+            var doomWindow = new Doom2Window(this, 1);
+            Application.Current.MainWindow = doomWindow;
+            doomWindow.Show();
+            Hide();
+        }
+
+        private void GameImageClick(object sender, MouseButtonEventArgs e)
+        {
+            var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
+            Application.Current.MainWindow = doomWindow;
             doomWindow.Show();
             Hide();
         }
@@ -42,6 +51,11 @@ namespace LanPartyHub
 
         private void Doom2MouseEnter(object sender, MouseEventArgs e)
         {
+        }
+
+        private void GameInage_Loaded(object sender, RoutedEventArgs e)
+        {
+            GameInage.Init(ApplicationManager.Settings.Games[0]);
         }
     }
 }

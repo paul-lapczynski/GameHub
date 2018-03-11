@@ -20,5 +20,10 @@
                     <DropShadowEffect Direction="307" RenderingBias="Quality"/>
                 </Image.Effect>
             </Image>
+        <local:GameImage Background="AliceBlue" x:Name="GameInage"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Margin="10,194,0,0" MouseDown="GameImageClick" Loaded="GameInage_Loaded">
+            <local:GameImage.Effect>
+                <DropShadowEffect Direction="307" RenderingBias="Quality"/>
+            </local:GameImage.Effect>
+        </local:GameImage>
         </SelectiveScrollingGrid>
 </Window>

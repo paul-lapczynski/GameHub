@@ -1,5 +1,7 @@
-﻿using LanPartyHub.Models;
+﻿using LanPartyHub.Helpers;
+using LanPartyHub.Models;
 using LanPartyHub.Models.Doom;
+using LanPartyHub.Models.DOSBox;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,8 +16,11 @@ namespace LanPartyHub.Managers
     {
         public DoomInfo DoomInfo { get; }
 
-        public DoomManager()
+        private int _gameId;
+
+        public DoomManager(int gameId)
         {
+            _gameId = gameId;
             DoomInfo = GetDoomInfo();
         }
 
@@ -124,18 +129,32 @@ namespace LanPartyHub.Managers
         {
             var directory = Directory.GetCurrentDirectory() + @"\Content\DoomLevels.json";
 
-            using (var fs = new FileStream(directory, FileMode.Open))
+            return JsonFileHelper.ReadAsObject<DoomInfo>(directory);
+        }
+
+        public DOSBoxOptions GetDOSBoxOptions(Doom2Window context)
+        {
+            var gameSettings = ApplicationManager.Settings.Games.First(x => x.GameId == _gameId);
+
+            return new DOSBoxOptions
             {
-                using (var r = new StreamReader(fs))
+                ExeFolderPath = gameSettings.FolderPath,
+                ExeName = gameSettings.ExecutableName,
+                Fullscreen = true,
+                Arguments = GetDoomArguments(new DoomArguments
                 {
-                    var str = new StringBuilder();
-                    str.Append(r.ReadToEnd());
-
-                    var doomInfo = Newtonsoft.Json.JsonConvert.DeserializeObject<DoomInfo>(str.ToString());
-
-                    return doomInfo;
-                }
-            }
+                    StartLevel = ((KeyValue)context.LevelDropdown.SelectedItem).Key,
+                    Turbo = context.TurboCheckbox.IsChecked,
+                    TurboPercentage = (int)Math.Floor(context.TurboSlider.Value),
+                    Multiplayer = context.MultiplayerCheckbox.IsChecked,
+                    Deathmath = context.DeathmatchCheckbox.IsChecked,
+                    Altdeath = context.WeaponReaspon.IsChecked,
+                    NumberOfPlayers = (int?)context.PlayersDropdown.SelectedValue,
+                    SkillLevel = (string)context.SkillLevelDropdown.SelectedValue,
+                    Timer = (int)Math.Floor(context.TimerSlider.Value),
+                    UseTimer = context.UseTimerCheckbox.IsChecked
+                })
+            };
         }
     }
 }
