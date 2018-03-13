@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -78,6 +81,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DOSBoxConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="War2Window.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Doom2Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +108,16 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Managers\War2Manager.cs" />
+    <Compile Include="DOSBoxConfig.xaml.cs">
+      <DependentUpon>DOSBoxConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="War2Window.xaml.cs">
+      <DependentUpon>War2Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="Doom2Window.xaml.cs">
       <DependentUpon>Doom2Window.xaml</DependentUpon>

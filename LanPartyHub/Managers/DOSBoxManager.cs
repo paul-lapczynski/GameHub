@@ -18,7 +18,7 @@ namespace LanPartyHub.Managers
     {
         private static readonly string exe = "DOSBox.exe";
         private static readonly string workingDirectory = Directory.GetCurrentDirectory() + @"\Content\DOSBox\";
-        private static readonly string DOSBoxC = ConfigurationManager.AppSettings.Get("DOSBoxC");
+        private static readonly string DOSBoxC = ApplicationManager.Settings.VirtualDOSBoxCDrivePath;
 
         public DOSBoxManager()
         {

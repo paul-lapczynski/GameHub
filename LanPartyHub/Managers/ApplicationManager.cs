@@ -31,6 +31,19 @@ namespace LanPartyHub.Managers
             }
         }
 
+        static public void SaveSettings()
+        {
+            var directory = Directory.GetCurrentDirectory() + @"\Settings.json";
+            try
+            {
+                JsonFileHelper.CreateFileFromObject<ApplicationSettings>(directory, Settings);
+            }
+            catch
+            {
+                
+            }
+        }
+
         private static void LoadAppSettings()
         {
             var directory = Directory.GetCurrentDirectory() + @"\Settings.json";

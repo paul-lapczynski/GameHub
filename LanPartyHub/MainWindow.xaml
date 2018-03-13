@@ -3,27 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:LanPartyHub"
         mc:Ignorable="d"
         Title="Game Hub" Height="500" Width="800" Background="DarkGray">
-        <SelectiveScrollingGrid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="Doom_2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/Doom2_title.png" Margin="10,10,0,0" MouseDown="Doom2MouseDown" MouseEnter="Doom2MouseEnter">
-                <Image.Effect>
-                    <DropShadowEffect Direction="307" RenderingBias="Quality"/>
-                </Image.Effect>
-            </Image>
-            <Image x:Name="War2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/War2.jpg" Margin="299,10,0,0" MouseDown="War2_MouseDown">
-                <Image.Effect>
-                    <DropShadowEffect Direction="307" RenderingBias="Quality"/>
-                </Image.Effect>
-            </Image>
+    <SelectiveScrollingGrid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="389*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="Doom_2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/Doom2_title.png" Margin="10,10,0,0" MouseDown="Doom2MouseDown" MouseEnter="Doom2MouseEnter">
+            <Image.Effect>
+                <DropShadowEffect Direction="307" RenderingBias="Quality"/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="War2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/War2.jpg" Margin="299,10,0,0" MouseDown="War2_MouseDown">
+            <Image.Effect>
+                <DropShadowEffect Direction="307" RenderingBias="Quality"/>
+            </Image.Effect>
+        </Image>
         <local:GameImage Background="AliceBlue" x:Name="GameInage"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Margin="10,194,0,0" MouseDown="GameImageClick" Loaded="GameInage_Loaded">
             <local:GameImage.Effect>
                 <DropShadowEffect Direction="307" RenderingBias="Quality"/>
             </local:GameImage.Effect>
         </local:GameImage>
-        </SelectiveScrollingGrid>
+        <fa:ImageAwesome Icon="Cogs" Cursor="Hand" MouseDown="MainConfig_MouseDown" Height="50" Margin="708,10,10,399" Width="50" />
+    </SelectiveScrollingGrid>
 </Window>

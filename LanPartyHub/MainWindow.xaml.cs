@@ -46,16 +46,23 @@ namespace LanPartyHub
 
         private void War2_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-        }
-
-        private void Doom2MouseEnter(object sender, MouseEventArgs e)
-        {
+            var war2Window = new War2Window(this, 2);
+            Application.Current.MainWindow = war2Window;
+            war2Window.Show();
+            Hide();
         }
 
         private void GameInage_Loaded(object sender, RoutedEventArgs e)
         {
             GameInage.Init(ApplicationManager.Settings.Games[0]);
+        }
+
+        private void MainConfig_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var Window = new DOSBoxConfigWindow(this);
+            Application.Current.MainWindow = Window;
+            Window.Show();
+            Hide();
         }
     }
 }
