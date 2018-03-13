@@ -12,7 +12,7 @@
             <ColumnDefinition Width="389*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <Image x:Name="Doom_2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/Doom2_title.png" Margin="10,10,0,0" MouseDown="Doom2MouseDown" MouseEnter="Doom2MouseEnter">
+        <Image x:Name="Doom_2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/Doom2_title.png" Margin="10,10,0,0" MouseDown="Doom2MouseDown">
             <Image.Effect>
                 <DropShadowEffect Direction="307" RenderingBias="Quality"/>
             </Image.Effect>
