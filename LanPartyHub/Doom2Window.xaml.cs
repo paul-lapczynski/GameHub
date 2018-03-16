@@ -1,21 +1,9 @@
 ﻿using LanPartyHub.Managers;
 using LanPartyHub.Models;
-using LanPartyHub.Models.Doom;
-using LanPartyHub.Models.DOSBox;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LanPartyHub
 {
@@ -78,7 +66,7 @@ namespace LanPartyHub
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(Minutes != null)
+            if (Minutes != null)
             {
                 Minutes.Content = 10 - Math.Floor(e.NewValue) + " Minutes";
             }
@@ -86,7 +74,7 @@ namespace LanPartyHub
 
         private void TurboSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if(TurboPercentage != null)
+            if (TurboPercentage != null)
             {
                 TurboPercentage.Content = Math.Floor(e.NewValue) + "%";
             }

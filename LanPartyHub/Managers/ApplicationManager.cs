@@ -34,6 +34,7 @@ namespace LanPartyHub.Managers
         private static void LoadAppSettings()
         {
             var directory = Directory.GetCurrentDirectory() + @"\Settings.json";
+            
             try
             {
                 _settings = JsonFileHelper.ReadAsObject<ApplicationSettings>(directory);

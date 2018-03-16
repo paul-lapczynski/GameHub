@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,14 +11,25 @@ using Zeroconf;
 
 namespace LanPartyHub.Managers
 {
+    /// <summary>
+    /// WARNING: DEPRECIATED
+    /// </summary>
     public class ConnectionManager : IDisposable
     {
-        TcpListener server;
         TcpClient client;
+
+        TcpListener server;
+        TcpClient serverClient;
+        List<TcpClient> tcpClientConnection;
+
+        /// <summary>
+        ///  Remove before deploying. This is temporary because of client/server is being run locally
+        /// </summary>
+        object clientLock = new object();
 
         public ConnectionManager()
         {
-            TestSerer();
+            tcpClientConnection = new List<TcpClient>();
         }
 
         public async Task Connect()
@@ -28,41 +40,41 @@ namespace LanPartyHub.Managers
 
         public TcpListener StartServer()
         {
-            var server = TcpListener.Create(9125);
+            server = TcpListener.Create(9125);
             server.Start();
-            Listen();
 
-            // TODO need to start the server with the port number
-            return server;
-        }
-
-        public void Listen()
-        {
             Task.Run(() =>
             {
                 while (true)
                 {
-                    var client = server.AcceptTcpClient();
-                    var stream = client.GetStream();
-                    if (!stream.DataAvailable)
+                    try
                     {
+                        if (server.Pending())
+                        {
+                            serverClient = server.AcceptTcpClient();
+                        }
+
+                        if (serverClient != null && serverClient.Connected && serverClient.GetStream().DataAvailable)
+                        {
+                            var stream = new StreamReader(serverClient.GetStream());
+                            var gotcha = stream.ReadToEnd();
+                            Console.WriteLine($"Got Data: {gotcha}");
+                        }
+                    }
+                    catch
+                    {
+                        serverClient.Close();
+                        serverClient.Dispose();
                         continue;
                     }
 
-                    byte[] buffer = new byte[client.ReceiveBufferSize];
 
-                    //---read incoming stream---
-                    int bytesRead = stream.Read(buffer, 0, client.ReceiveBufferSize);
-
-                    //---convert the data received into a string---
-                    string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine("Received : " + dataReceived);
-
-                    //---write back the text to the client---
-                    Console.WriteLine("Sending back : " + dataReceived);
-                    stream.Write(buffer, 0, bytesRead);
+                    Thread.Sleep(100);
                 }
-            }).Start();
+            });
+
+            // TODO need to start the server with the port number
+            return server;
         }
 
         public async Task<IZeroconfHost> ResolveServerHost()
@@ -86,66 +98,66 @@ namespace LanPartyHub.Managers
 
             var ip = IPAddress.Parse(serverHost.IPAddress);
 
-            var endpoint = new IPEndPoint(ip, 9127);
-            client = new TcpClient(endpoint);
-            client.Connect(ip, 9125);
-            var stream = client.GetStream();
+            //var endpoint = new IPEndPoint(IPAddress.Loopback, 9127);
 
-            //---create a TCPClient object at the IP and port no.---
-            NetworkStream nwStream = client.GetStream();
-            byte[] bytesToSend = Encoding.ASCII.GetBytes("WHAT THE HELL");
-
-            //---send the text---
-            Console.WriteLine("Sending : " + "what the hell");
-            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-
-            //---read back the text---
-            client.Close();
-
-            if (client.Connected)
+            Task.Run(() =>
             {
-                Console.WriteLine("Connected");
-            }
+                while (true)
+                {
+                    lock (clientLock)
+                    {
+                        if (client == null || !client.Connected)
+                        {
+                            client = new TcpClient();
+                            client.Connect(ip, 9125);
+                        }
+
+                        var stream = client.GetStream();
+                        if (stream.CanWrite)
+                        {
+                            var writer = new StreamWriter(stream);
+                            writer.WriteLine("Thread 1");
+                            writer.Flush();
+                            writer.Close();
+                        }
+                        Thread.Sleep(300);
+                    }
+                }
+            });
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    lock (clientLock)
+                    {
+                        if (client == null || !client.Connected)
+                        {
+                            client = new TcpClient();
+                            client.Connect(ip, 9125);
+                        }
+
+                        var stream = client.GetStream();
+                        if (stream.CanWrite)
+                        {
+                            var writer = new StreamWriter(stream);
+                            writer.WriteLine("Thread 2");
+                            writer.Flush();
+                            writer.Close();
+                        }
+                        Thread.Sleep(300);
+                    }
+                }
+            });
         }
 
         public void Dispose()
         {
             client.Close();
             client.Dispose();
+            serverClient.Close();
+            serverClient.Dispose();
             server.Stop();
-        }
-
-        public void TestClient()
-        {
-
-        }
-
-        public void TestSerer()
-        {
-            var server = TcpListener.Create(8004);
-            server.Start();
-            var tcpClient = new TcpClient();
-            var tcpClient2 = new TcpClient();
-            try
-            {
-                tcpClient.Connect(IPAddress.Loopback, 8004);
-                tcpClient2.Connect(IPAddress.Loopback, 8004);
-
-                var networkStream = tcpClient.GetStream();
-                var networkStream2 = tcpClient2.GetStream();
-
-                if (networkStream.CanWrite && networkStream.CanRead)
-                {
-                    var txtSize = "10234";
-                    var sendFileSize = Encoding.ASCII.GetBytes(txtSize);
-
-                    networkStream.Write(sendFileSize, 0, txtSize.Length);
-                }
-                tcpClient.Close();
-                tcpClient.Dispose();
-                server.Stop();
-            }
-            catch { }
         }
     }
 }

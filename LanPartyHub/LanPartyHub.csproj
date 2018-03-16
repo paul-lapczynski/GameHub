@@ -78,6 +78,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enumerations\GameHubEnumerations.cs" />
+    <Compile Include="Helpers\GameHubConnectivity.cs" />
+    <Compile Include="Interfaces\IGameHubMessage.cs" />
+    <Compile Include="Models\Connectivity\QueueChangeEventArgs.cs" />
+    <Compile Include="Models\GameHubConnectionClient.cs" />
+    <Compile Include="Utilities\GameHubClient.cs" />
+    <Compile Include="Models\GameHubMessage.cs" />
+    <Compile Include="Utilities\GameHubMessageQueue.cs" />
+    <Compile Include="Utilities\GameHubServer.cs" />
     <Page Include="Doom2Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,10 +171,7 @@
   <ItemGroup>
     <Resource Include="Images\War2.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enumerations\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Content\DOSBox\DOSBox.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
