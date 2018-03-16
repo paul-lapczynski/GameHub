@@ -1,4 +1,6 @@
 ﻿using LanPartyHub.Managers;
+using Microsoft.Win32;
+using System.IO;
 using System.Windows;
 
 namespace LanPartyHub
@@ -28,5 +30,52 @@ namespace LanPartyHub
             ApplicationManager.Settings.VirtualDOSBoxCDrivePath = DOSBoxCPath.Text.ToString();
             ApplicationManager.SaveSettings();
         }
-}
+
+        private void DOSBoxConfigAddGame(object sender, RoutedEventArgs e)
+        {
+            string FilePath;
+            string FileName;
+            string GameName;
+            string ID;
+            var newGame = new Models.Game();
+
+            //Open file picker to select game executable
+            OpenFileDialog openFileDialog = new OpenFileDialog() {
+                Multiselect = false,
+                InitialDirectory = ApplicationManager.Settings.VirtualDOSBoxCDrivePath,
+                Title = "Select Game Executable"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            { 
+                FilePath = Path.GetDirectoryName(openFileDialog.FileName);
+                FileName = Path.GetFileName(openFileDialog.FileName);
+                GameName = new DirectoryInfo(FilePath).Name;
+                ID = System.Guid.NewGuid().ToString();
+                newGame.Name = GameName;
+                newGame.FolderPath = FilePath;
+                newGame.ExecutableName = FileName;
+                newGame.GameId = ID;    
+            }
+
+            //Open file picker to select game image
+            openFileDialog = new OpenFileDialog()
+            {
+                Multiselect = false,
+                InitialDirectory = ApplicationManager.Settings.VirtualDOSBoxCDrivePath,
+                Title = "Select Game Image"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                newGame.ImagePath = openFileDialog.FileName;
+            }
+
+            //Update games list
+            if (!string.IsNullOrEmpty(newGame.Name) && !string.IsNullOrEmpty(newGame.ImagePath)) {
+                ApplicationManager.Settings.Games.Add(newGame);
+                ApplicationManager.SaveSettings();
+            }
+        }
+    }
 }

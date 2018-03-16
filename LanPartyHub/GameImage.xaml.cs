@@ -36,7 +36,7 @@ namespace LanPartyHub
             GameIcon.Source = new BitmapImage(uriSource);
         }
 
-        public int GameId
+        public string GameId
         {
             get
             {

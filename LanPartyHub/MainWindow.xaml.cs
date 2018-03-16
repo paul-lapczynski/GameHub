@@ -25,12 +25,21 @@ namespace LanPartyHub
     {
         public MainWindow()
         {
-            InitializeComponent();
+           InitializeComponent();
+
+            /// <!-- Testing Layout for Dynamic Games -->
+            //List<GameItem> items = new List<GameItem>();
+            //items.Add(new GameItem() { ItemName = "Game 1", ItemImage = "C:\\Users\\Pete\\Desktop\\Game 1.jpg" });
+            //items.Add(new GameItem() { ItemName = "Game 2", ItemImage = "C:\\Users\\Pete\\Desktop\\Game 2.jpg" });
+            //items.Add(new GameItem() { ItemName = "Game 3", ItemImage = "C:\\Users\\Pete\\Desktop\\Game 3.jpg" });
+            //icGamesList.ItemsSource = items;
+            icGamesList.ItemsSource = ApplicationManager.Settings.Games;
+            
         }
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var doomWindow = new Doom2Window(this, 1);
+            var doomWindow = new Doom2Window(this, "1");
             Application.Current.MainWindow = doomWindow;
             doomWindow.Show();
             Hide();
@@ -46,15 +55,17 @@ namespace LanPartyHub
 
         private void War2_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var war2Window = new War2Window(this, 2);
+            var war2Window = new War2Window(this, "2");
             Application.Current.MainWindow = war2Window;
             war2Window.Show();
             Hide();
         }
 
-        private void GameInage_Loaded(object sender, RoutedEventArgs e)
+        private void GameImage_Loaded(object sender, RoutedEventArgs e)
         {
-            GameInage.Init(ApplicationManager.Settings.Games[0]);
+            //GameImage.Init(ApplicationManager.Settings.Games[0]);
+            var image = (GameImage)e.Source;
+            image.Init(image.GameId);
         }
 
         private void MainConfig_MouseDown(object sender, MouseButtonEventArgs e)
@@ -64,5 +75,11 @@ namespace LanPartyHub
             Window.Show();
             Hide();
         }
+    }
+
+    public class GameItem
+    {
+        public string ItemName { get; set; }
+        public string ItemImage { get; set; }
     }
 }

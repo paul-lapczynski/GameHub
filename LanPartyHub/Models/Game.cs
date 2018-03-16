@@ -28,7 +28,7 @@ namespace LanPartyHub.Models
         /// <summary>
         /// Unique id for each game GameHub contains
         /// </summary>
-        public int GameId { get; set; }
+        public string GameId { get; set; }
 
         /// <summary>
         /// Image path relative to the GameHub Application Directory

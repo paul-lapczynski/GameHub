@@ -5,9 +5,9 @@ namespace LanPartyHub.Managers
 {
     public class War2Manager
     {
-        private int _gameId;
+        private string _gameId;
 
-        public War2Manager(int gameId)
+        public War2Manager(string gameId)
         {
             _gameId = gameId;
         }

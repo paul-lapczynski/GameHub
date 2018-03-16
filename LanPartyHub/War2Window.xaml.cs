@@ -14,7 +14,7 @@ namespace LanPartyHub
         War2Manager war2Manager;
         Process war2;
 
-        public War2Window(MainWindow main, int gameId)
+        public War2Window(MainWindow main, string gameId)
         {
             _main = main;
             war2Manager = new War2Manager(gameId);
