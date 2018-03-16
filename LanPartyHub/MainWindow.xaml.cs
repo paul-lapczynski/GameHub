@@ -26,37 +26,38 @@ namespace LanPartyHub
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameHubServer gg;
-        GameHubClient gg2;
+        GameHubServer Server;
+        GameHubClient Client;
 
         public MainWindow()
         {
-            InitializeComponent();
-            gg = new GameHubServer();
-            gg2 = new GameHubClient();
-            gg2.Connect();
+           InitializeComponent();
+
+            icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
+            Server = new GameHubServer();
+            Client = new GameHubClient();
+            Client.Connect();
         }
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
-            gg.Dispose();
-            //var doomWindow = new Doom2Window(this, 1);
-            //Application.Current.MainWindow = doomWindow;
-            //doomWindow.Show();
-            //Hide();
+            var doomWindow = new Doom2Window(this, "1");
+            Application.Current.MainWindow = doomWindow;
+            doomWindow.Show();
+            Hide();
         }
 
         private void GameImageClick(object sender, MouseButtonEventArgs e)
         {
-            var message = new GameHubMessage
-            {
-                Status = eMessageType.HandShakeOne,
-                SenderGamePort = ((IPEndPoint)gg.Server.LocalEndpoint).Port,
-                GameStarted = false,
-                Text = "From Dynamc image"
-            };
+            //var message = new GameHubMessage
+            //{
+            //    Status = eMessageType.HandShakeOne,
+            //    SenderGamePort = ((IPEndPoint)gg.Server.LocalEndpoint).Port,
+            //    GameStarted = false,
+            //    Text = "From Dynamc image"
+            //};
 
-            gg.NotifyClients(message);
+            //gg.NotifyClients(message);
             //var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
             //Application.Current.MainWindow = doomWindow;
             //doomWindow.Show();
@@ -65,23 +66,25 @@ namespace LanPartyHub
 
         private void War2_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var message = new GameHubMessage
-            {
-                Status = eMessageType.HandShakeOne,
-                Text = "War 2 Mouse Down"
-            };
-
-            gg.NotifyClients(message);
+            var war2Window = new War2Window(this, "2");
+            Application.Current.MainWindow = war2Window;
+            war2Window.Show();
+            Hide();
         }
 
-        private void Doom2MouseEnter(object sender, MouseEventArgs e)
+        private void GameImage_Loaded(object sender, RoutedEventArgs e)
         {
+            var image = (GameImage)e.Source;
+            var game = (Game)image.DataContext;
+            image.Init(game);
         }
 
-        private void InitGameImage(object sender, RoutedEventArgs e)
+        private void MainConfig_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var gg = (GameImage)e.Source;
-            GameInage.Init(ApplicationManager.Settings.Games[0]);
+            var Window = new DOSBoxConfigWindow(this);
+            Application.Current.MainWindow = Window;
+            Window.Show();
+            Hide();
         }
     }
 }

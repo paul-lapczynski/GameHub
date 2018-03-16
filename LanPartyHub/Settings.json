@@ -2,11 +2,18 @@
   "Games": [
     {
       "Name": "Doom 2",
-      "FolderPath": "doomiido\\",
+      "FolderPath": "Doom2\\",
       "ExecutableName": "DOOM2.EXE",
       "GameId": 1,
       "ImagePath": "Images/Doom2_title.png"
+    },
+	{
+      "Name": "Warcraft 2",
+      "FolderPath": "Warcraft 2\\",
+      "ExecutableName": "war2.EXE",
+      "GameId": 2,
+      "ImagePath": "Images/War2.jpg"
     }
   ],
-  "VirtualDOSBoxCDrivePath": "D:\\Games\\DOSBoxC"
+  "VirtualDOSBoxCDrivePath": "C:\\Games\\DOS"
 }

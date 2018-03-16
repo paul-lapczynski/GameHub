@@ -16,9 +16,9 @@ namespace LanPartyHub.Managers
     {
         public DoomInfo DoomInfo { get; }
 
-        private int _gameId;
+        private string _gameId;
 
-        public DoomManager(int gameId)
+        public DoomManager(string gameId)
         {
             _gameId = gameId;
             DoomInfo = GetDoomInfo();

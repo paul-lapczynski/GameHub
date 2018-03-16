@@ -16,7 +16,7 @@ namespace LanPartyHub
         DoomManager doomManager;
         Process doom;
 
-        public Doom2Window(MainWindow main, int gameId)
+        public Doom2Window(MainWindow main, string gameId)
         {
             _main = main;
             doomManager = new DoomManager(gameId);

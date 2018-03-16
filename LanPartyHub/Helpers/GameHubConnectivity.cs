@@ -132,8 +132,7 @@ namespace LanPartyHub.Helpers
             var options = new ResolveOptions("_http._tcp.local.")
             {
                 Retries = 10,
-                RetryDelay = TimeSpan.FromSeconds(1),
-                ScanTime = TimeSpan.FromSeconds(2)
+                RetryDelay = TimeSpan.FromSeconds(1)
             };
 
             var responses = await ZeroconfResolver.ResolveAsync(options);

@@ -3,27 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:LanPartyHub"
         mc:Ignorable="d"
-        Title="Game Hub" Height="500" Width="800" Background="DarkGray">
-        <SelectiveScrollingGrid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="Doom_2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/Doom2_title.png" Margin="10,10,0,0" MouseDown="Doom2MouseDown" MouseEnter="Doom2MouseEnter">
-                <Image.Effect>
-                    <DropShadowEffect Direction="307" RenderingBias="Quality"/>
-                </Image.Effect>
-            </Image>
-            <Image x:Name="War2"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Source="Images/War2.jpg" Margin="299,10,0,0" MouseDown="War2_MouseDown">
-                <Image.Effect>
-                    <DropShadowEffect Direction="307" RenderingBias="Quality"/>
-                </Image.Effect>
-            </Image>
-        <local:GameImage Background="AliceBlue" x:Name="GameInage"  HorizontalAlignment="Left" Height="156" VerticalAlignment="Top" Width="208" Cursor="Hand" Margin="10,194,0,0" MouseDown="GameImageClick" Loaded="InitGameImage">
-            <local:GameImage.Effect>
-                <DropShadowEffect Direction="307" RenderingBias="Quality"/>
-            </local:GameImage.Effect>
-        </local:GameImage>
-        </SelectiveScrollingGrid>
+        Title="Game Hub" SizeToContent="WidthAndHeight" Width="700" Background="DarkGray">
+    <ScrollViewer x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Label TextOptions.TextRenderingMode="Grayscale" FontSize="25" HorizontalAlignment="Center">Select a game!</Label>
+            <fa:ImageAwesome Icon="Cogs" Cursor="Hand" MouseDown="MainConfig_MouseDown" Height="40"  Width="690" Margin="0,0,10,0" HorizontalAlignment="Right" />
+            <WrapPanel Grid.Row="1">
+                <ItemsControl Name="icGamesList">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:GameImage Height="150" Width="200" Cursor="Hand" Margin="25,25,0,0" Loaded="GameImage_Loaded">
+                                <local:GameImage.Effect>
+                                    <DropShadowEffect Direction="307" RenderingBias="Quality"/>
+                                </local:GameImage.Effect>
+                            </local:GameImage>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>
