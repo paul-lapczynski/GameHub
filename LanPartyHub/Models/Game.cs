@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanPartyHub.Enumerations.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,5 +35,10 @@ namespace LanPartyHub.Models
         /// Image path relative to the GameHub Application Directory
         /// </summary>
         public string ImagePath { get; set; }
+
+        /// <summary>
+        /// Startup type for an individual game
+        /// </summary>
+        public eStartupType StartupType { get; set; }
     }
 }

@@ -27,5 +27,11 @@ namespace LanPartyHub.Enumerations
             MacOS = 3,
             Wine = 4
         }
+
+        public enum eStartupType
+        {
+            Standard = 1,
+            Custom = 2
+        }
     }
 }

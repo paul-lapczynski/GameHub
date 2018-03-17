@@ -85,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="War2Window.xaml">
+    <Page Include="StdGameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -114,12 +114,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Managers\War2Manager.cs" />
+    <Compile Include="Managers\StdGameManager.cs" />
     <Compile Include="DOSBoxConfig.xaml.cs">
       <DependentUpon>DOSBoxConfig.xaml</DependentUpon>
     </Compile>
-    <Compile Include="War2Window.xaml.cs">
-      <DependentUpon>War2Window.xaml</DependentUpon>
+    <Compile Include="StdGameWindow.xaml.cs">
+      <DependentUpon>StdGameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Doom2Window.xaml.cs">
       <DependentUpon>Doom2Window.xaml</DependentUpon>
@@ -176,7 +176,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Settings.json" />
+    <EmbeddedResource Include="Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -187,7 +189,9 @@
   <ItemGroup>
     <Resource Include="Images\War2.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\OregonTrail.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content\DOSBox\DOSBox.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

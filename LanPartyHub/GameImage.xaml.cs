@@ -30,10 +30,7 @@ namespace LanPartyHub
 
         public void Init(Game game)
         {
-            _game = game;
-            var uriSource = new Uri($"/LanPartyHub;component/{game.ImagePath}", UriKind.Relative);
-            GameIcon.Stretch = Stretch.UniformToFill;
-            GameIcon.Source = new BitmapImage(uriSource);
+            _game = game;       
         }
 
         public string GameId
@@ -42,6 +39,18 @@ namespace LanPartyHub
             {
                 return _game.GameId;
             }
+        }
+
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Create a new BitmapImage.
+            BitmapImage b = new BitmapImage();
+            b.BeginInit();
+            b.UriSource = new Uri( _game.ImagePath );
+            b.EndInit();
+            
+            GameIcon.Stretch = Stretch.UniformToFill;
+            GameIcon.Source = b;
         }
     }
 }
