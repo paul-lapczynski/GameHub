@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace LanPartyHub.Managers
 {
-    public class War2Manager
+    public class StdGameManager
     {
         private string _gameId;
 
-        public War2Manager(string gameId)
+        public StdGameManager(string gameId)
         {
             _gameId = gameId;
         }
-        public DOSBoxOptions GetDOSBoxOptions(War2Window context)
+        public DOSBoxOptions GetDOSBoxOptions(StdGameWindow context)
         {
             var gameSettings = ApplicationManager.Settings.Games.First(x => x.GameId == _gameId);
 

@@ -6,7 +6,23 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:LanPartyHub"
         mc:Ignorable="d"
-        Title="Game Hub" SizeToContent="WidthAndHeight" Width="700" Background="DarkGray">
+        Title="Game Hub" Height="635" Width="735" Background="DarkGray">
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="Border.IsMouseOver" Value="True">
+                    <!--<Setter Property="Background" Value="DarkSlateGray"/>-->
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Aqua" Opacity="0.5"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <ScrollViewer x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
@@ -16,7 +32,7 @@
             </Grid.RowDefinitions>
 
             <Label TextOptions.TextRenderingMode="Grayscale" FontSize="25" HorizontalAlignment="Center">Select a game!</Label>
-            <fa:ImageAwesome Icon="Cogs" Cursor="Hand" MouseDown="MainConfig_MouseDown" Height="40"  Width="690" Margin="0,0,10,0" HorizontalAlignment="Right" />
+            <fa:ImageAwesome Icon="Cog" Cursor="Hand" Name="MainConfig" MouseDown="MainConfig_MouseDown" MouseEnter="MainConfig_MouseEnter" MouseLeave="MainConfig_MouseLeave" Height="40"  Width="690" Margin="0,0,10,0" HorizontalAlignment="Right"/>
             <WrapPanel Grid.Row="1">
                 <ItemsControl Name="icGamesList">
                     <ItemsControl.ItemsPanel>

@@ -37,7 +37,7 @@ namespace LanPartyHub.Models
         public string ImagePath { get; set; }
 
         /// <summary>
-        ///  Startup type for an individual game
+        /// Startup type for an individual game
         /// </summary>
         public eStartupType StartupType { get; set; }
     }

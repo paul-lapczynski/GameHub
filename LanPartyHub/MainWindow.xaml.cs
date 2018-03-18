@@ -48,8 +48,8 @@ namespace LanPartyHub
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var doomWindow = new Doom2Window(this, "1");
-            Application.Current.MainWindow = doomWindow;
+            var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
+            doomWindow.Owner = Application.Current.MainWindow;
             doomWindow.Show();
             Hide();
         }
@@ -58,23 +58,23 @@ namespace LanPartyHub
         {
             var image = (GameImage)e.Source;
             var game = (Game)image.DataContext;
-
-            //var message = new GameHubMessage
-            //{
-            //    Status = eMessageType.HandShakeOne,
-            //    SenderGamePort = ((IPEndPoint)Server.Server.LocalEndpoint).Port,
-            //    GameStarted = false,
-            //    Text = game.Name
-            //};
-
-            //Server.NotifyClients(message);
+            // Standard Startup - uses StdGameWindow
+            if (game.StartupType == Enumerations.Game.eStartupType.Standard)
+            {
+                StdGame_MouseDown(sender, e);
+            }
+            // Custom Startup - uses different game window
+            else if (game.StartupType == Enumerations.Game.eStartupType.Custom)
+            {
+                Doom2MouseDown(sender, e);
+            }
         }
 
-        private void War2_MouseDown(object sender, MouseButtonEventArgs e)
+        private void StdGame_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var war2Window = new War2Window(this, "2");
-            Application.Current.MainWindow = war2Window;
-            war2Window.Show();
+            var stdGameWindow = new StdGameWindow(this, (e.Source as GameImage).GameId);
+            stdGameWindow.Owner = Application.Current.MainWindow;
+            stdGameWindow.Show();
             Hide();
         }
 
@@ -88,9 +88,20 @@ namespace LanPartyHub
         private void MainConfig_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var Window = new DOSBoxConfigWindow(this);
-            Application.Current.MainWindow = Window;
+            Window.Owner = Application.Current.MainWindow;
             Window.Show();
             Hide();
+        }
+
+        private void MainConfig_MouseEnter(object sender, MouseEventArgs e)
+        {
+            MainConfig.Spin = true;
+            MainConfig.SpinDuration = 5;
+        }
+
+        private void MainConfig_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MainConfig.Spin = false;
         }
     }
 }
