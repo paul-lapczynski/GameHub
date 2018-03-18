@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanPartyHub"
         mc:Ignorable="d"
-        Title="GameWindow" Height="260" Width="325">
+        Title="GameWindow" Height="260" Width="325"
+        WindowStartupLocation="CenterOwner">
     <Grid Unloaded="Unload" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,6 +18,8 @@
                 <GradientStop Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}" Offset="0.84"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button x:Name="StartGameButton" Content="Start Game" HorizontalAlignment="Left" Margin="99,99,0,0" VerticalAlignment="Top" Width="125" Height="35" Click="StartStdGame" RenderTransformOrigin="0.504,-1.941"/>
+        <Button Name="StartGameButton" HorizontalAlignment="Center" VerticalAlignment="Center"  Click="StartStdGame" >
+            <TextBlock Name="StartGameText" TextWrapping="Wrap" TextAlignment="Center" MinWidth="125" MaxWidth="125" Padding="5,5,5,5"/>
+        </Button>
     </Grid>
 </Window>

@@ -55,33 +55,38 @@ namespace LanPartyHub
                 FileName = Path.GetFileName(openFileDialog.FileName);
                 FolderName = new DirectoryInfo(FilePath).Name;
                 newGame.Name = FolderName;
-                newGame.FolderPath = FilePath;
+                newGame.FolderPath = FolderName;
                 newGame.ExecutableName = FileName;
                 newGame.GameId = Guid.NewGuid().ToString();
                 newGame.StartupType = Enumerations.Game.eStartupType.Standard;
             }
 
-            //Open file picker to select game image
-            openFileDialog = new OpenFileDialog()
+            if (!string.IsNullOrEmpty(newGame.Name))
             {
-                Multiselect = false,
-                InitialDirectory = ApplicationManager.Settings.VirtualDOSBoxCDrivePath,
-                Title = "Select Game Image"
-            };
+                //Open file picker to select game image
+                openFileDialog = new OpenFileDialog()
+                {
+                    Multiselect = false,
+                    Filter = "Image files (*.png;*.jpeg;*.jpg;*.bmp)|*.png;*.jpeg;*.jpg;*.bmp|All files (*.*)|*.*",
+                    InitialDirectory = ApplicationManager.Settings.VirtualDOSBoxCDrivePath,
+                    Title = "Select Game Image"
+                };
 
-            if (openFileDialog.ShowDialog() == true)
-            {
-                newGame.ImagePath = openFileDialog.FileName;
-            }
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    newGame.ImagePath = openFileDialog.FileName;
+                }
 
-            //Update games list
-            if (!string.IsNullOrEmpty(newGame.Name) && !string.IsNullOrEmpty(newGame.ImagePath))
-            {
-                ApplicationManager.Settings.Games.Add(newGame);
-                ApplicationManager.SaveSettings();
-                _main.icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
-                listGames.Items.Add(newGame.Name);
+                //Update games list
+                if (!string.IsNullOrEmpty(newGame.ImagePath))
+                {
+                    ApplicationManager.Settings.Games.Add(newGame);
+                    ApplicationManager.SaveSettings();
+                    _main.icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
+                    listGames.ItemsSource = ApplicationManager.Settings.Games.ToList();
+                }
             }
+            
         }
 
         private void DOSBoxConfigRemoveGame(object sender, RoutedEventArgs e)

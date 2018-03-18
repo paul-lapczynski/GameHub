@@ -6,5 +6,7 @@
              xmlns:local="clr-namespace:LanPartyHub"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Image x:Name="GameIcon" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" Loaded="Image_Loaded"></Image>
+    <Border>
+        <Image x:Name="GameIcon" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Loaded="Image_Loaded"></Image>
+    </Border>
 </UserControl>

@@ -48,8 +48,6 @@ namespace LanPartyHub
             b.BeginInit();
             b.UriSource = new Uri( _game.ImagePath );
             b.EndInit();
-            
-            GameIcon.Stretch = Stretch.UniformToFill;
             GameIcon.Source = b;
         }
     }

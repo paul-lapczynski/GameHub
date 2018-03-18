@@ -42,7 +42,7 @@ namespace LanPartyHub
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
             var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
-            Application.Current.MainWindow = doomWindow;
+            doomWindow.Owner = Application.Current.MainWindow;
             doomWindow.Show();
             Hide();
         }
@@ -66,7 +66,7 @@ namespace LanPartyHub
         private void StdGame_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var stdGameWindow = new StdGameWindow(this, (e.Source as GameImage).GameId);
-            Application.Current.MainWindow = stdGameWindow;
+            stdGameWindow.Owner = Application.Current.MainWindow;
             stdGameWindow.Show();
             Hide();
         }
@@ -81,9 +81,20 @@ namespace LanPartyHub
         private void MainConfig_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var Window = new DOSBoxConfigWindow(this);
-            Application.Current.MainWindow = Window;
+            Window.Owner = Application.Current.MainWindow;
             Window.Show();
             Hide();
+        }
+
+        private void MainConfig_MouseEnter(object sender, MouseEventArgs e)
+        {
+            MainConfig.Spin = true;
+            MainConfig.SpinDuration = 5;
+        }
+
+        private void MainConfig_MouseLeave(object sender, MouseEventArgs e)
+        {
+            MainConfig.Spin = false;
         }
     }
 }

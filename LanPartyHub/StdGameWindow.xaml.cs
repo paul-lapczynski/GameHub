@@ -22,7 +22,7 @@ namespace LanPartyHub
 
             InitializeComponent();
             Title = ApplicationManager.Settings.Games.First( game => game.GameId == gameId ).Name;
-            StartGameButton.Content = "Start " + Title;
+            StartGameText.Text = "Start " + Title;
             Closed += StdGameWindow_Closed;
         }
 

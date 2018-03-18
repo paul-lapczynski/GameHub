@@ -204,9 +204,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Doom_for_95_launcher.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="Bonjour">
       <Guid>{18FBED6D-F2B7-4EC8-A4A4-46282E635308}</Guid>
       <VersionMajor>1</VersionMajor>
