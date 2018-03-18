@@ -80,14 +80,6 @@ namespace LanPartyHub.Models
             GameHubConnectivity.Subscribe(Connection, MessageQueue, TimeSpan.FromMilliseconds(100), token);
         }
 
-        public async Task<int> FindServerPort()
-        {
-            var host = await GameHubConnectivity.ResolveServerHost();
-            var port = GameHubConnectivity.GetZeroconfigHostIp(host);
-
-            return port;
-        }
-
         private void HandleMessagesAdded(object sender, QueueChangeEventArgs args)
         {
             var messages = args.Messages;
@@ -97,10 +89,17 @@ namespace LanPartyHub.Models
 
         public void Dispose()
         {
-            _subscribeSoure.Cancel();
-            _subscribeSoure.Dispose();
-            Connection.Close();
-            Connection.Dispose();
+            if(_subscribeSoure != null)
+            {
+                _subscribeSoure.Cancel();
+                _subscribeSoure.Dispose();
+            }
+
+            if(Connection != null)
+            {
+                Connection.Close();
+                Connection.Dispose();
+            }
         }
     }
 }

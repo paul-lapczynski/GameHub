@@ -37,15 +37,20 @@ namespace LanPartyHub.Utilities
 
         public void Start()
         {
-            Server = TcpListener.Create(9125);
+            Server = TcpListener.Create(0);
             Server.Start();
+
+            var randomTcpPort = TcpListener.Create(0);
+            randomTcpPort.Start();
+            var portNumber = ((IPEndPoint)randomTcpPort.LocalEndpoint).Port;
+            randomTcpPort.Stop();
 
             var token = _tokenSource.Token;
 
             DnsHostProcess = Process.Start(new ProcessStartInfo
             {
                 FileName = "dns-sd.exe",
-                Arguments = $"-R \"GameHub-Discovery\" \"\" \"local\" {5467} ApplicationPort={((IPEndPoint)Server.LocalEndpoint).Port}"
+                Arguments = $"-R \"{GameHubConnectivity.DnsDiscoveryName}\" \"\" \"local\" {portNumber} {GameHubConnectivity.PortKeyDisplayName}={((IPEndPoint)Server.LocalEndpoint).Port}"
             });
 
             GameHubConnectivity.Listen(
@@ -55,10 +60,13 @@ namespace LanPartyHub.Utilities
                 TaskCreationOptions.LongRunning);
         }
 
-
         public void Dispose()
         {
-            DnsHostProcess.Close();
+            if(DnsHostProcess != null)
+            {
+                DnsHostProcess.Kill();
+            }
+
             _tokenSource.Cancel();
         }
 

@@ -32,11 +32,18 @@ namespace LanPartyHub
         public MainWindow()
         {
            InitializeComponent();
-
             icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
             Server = new GameHubServer();
             Client = new GameHubClient();
             Client.Connect();
+
+            Closed += MainWindow_Closed;
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            Server.Dispose();
+            Client.Dispose();
         }
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
@@ -49,19 +56,18 @@ namespace LanPartyHub
 
         private void GameImageClick(object sender, MouseButtonEventArgs e)
         {
+            var image = (GameImage)e.Source;
+            var game = (Game)image.DataContext;
+
             //var message = new GameHubMessage
             //{
             //    Status = eMessageType.HandShakeOne,
-            //    SenderGamePort = ((IPEndPoint)gg.Server.LocalEndpoint).Port,
+            //    SenderGamePort = ((IPEndPoint)Server.Server.LocalEndpoint).Port,
             //    GameStarted = false,
-            //    Text = "From Dynamc image"
+            //    Text = game.Name
             //};
 
-            //gg.NotifyClients(message);
-            //var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
-            //Application.Current.MainWindow = doomWindow;
-            //doomWindow.Show();
-            //Hide();
+            //Server.NotifyClients(message);
         }
 
         private void War2_MouseDown(object sender, MouseButtonEventArgs e)

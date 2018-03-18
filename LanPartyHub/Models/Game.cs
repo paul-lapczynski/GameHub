@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanPartyHub.Enumerations.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace LanPartyHub.Models
         /// The Folder Path Relative to the Virtual DOSBox C: Drive
         /// </summary>
         public string FolderPath { get; set; }
-        
+
         /// <summary>
         /// Executable name that DOSBox will execute.
         /// Example: DOOM2.EXE
@@ -34,5 +35,10 @@ namespace LanPartyHub.Models
         /// Image path relative to the GameHub Application Directory
         /// </summary>
         public string ImagePath { get; set; }
+
+        /// <summary>
+        ///  Startup type for an individual game
+        /// </summary>
+        public eStartupType StartupType { get; set; }
     }
 }

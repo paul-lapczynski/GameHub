@@ -26,7 +26,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <local:GameImage Height="150" Width="200" Cursor="Hand" Margin="25,25,0,0" Loaded="GameImage_Loaded">
+                            <local:GameImage Height="150" Width="200" Cursor="Hand" Margin="25,25,0,0" Loaded="GameImage_Loaded" MouseDown="GameImageClick">
                                 <local:GameImage.Effect>
                                     <DropShadowEffect Direction="307" RenderingBias="Quality"/>
                                 </local:GameImage.Effect>

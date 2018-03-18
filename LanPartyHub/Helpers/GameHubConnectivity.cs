@@ -19,6 +19,10 @@ namespace LanPartyHub.Helpers
 {
     public static class GameHubConnectivity
     {
+        public static readonly string PortKeyDisplayName = "ApplicationPort";
+
+        public static readonly string DnsDiscoveryName = "GameHub-Discovery";
+
         public static void Listen(
            Action<CancellationToken> action,
            TimeSpan pollInterval,
@@ -127,24 +131,37 @@ namespace LanPartyHub.Helpers
             }
         }
 
-        public static async Task<IZeroconfHost> ResolveServerHost()
+        public static async Task<IZeroconfHost> ResolveServerHost(int retries = 10)
         {
-            var options = new ResolveOptions("_http._tcp.local.")
+            IZeroconfHost host = null;
+
+            while (retries > 0)
             {
-                Retries = 10,
-                RetryDelay = TimeSpan.FromSeconds(1)
-            };
+                host = await InternalResolveServerHost();
 
+                if(host != null)
+                {
+                    break;
+                }
+
+                Thread.Sleep(TimeSpan.FromMilliseconds(50));
+            }
+
+            return host;
+        }
+
+        private static async Task<IZeroconfHost> InternalResolveServerHost()
+        {
+            var options = new ResolveOptions("_http._tcp.local.");
             var responses = await ZeroconfResolver.ResolveAsync(options);
-
-            var serverHost = responses.First(x => x.DisplayName == "GameHub-Discovery");
+            var serverHost = responses.FirstOrDefault(x => x.DisplayName == DnsDiscoveryName);
 
             return serverHost;
         }
 
         public static int GetZeroconfigHostIp(IZeroconfHost host)
         {
-            var port = host.Services.First().Value.Properties.First().First(x => x.Key == "ApplicationPort");
+            var port = host.Services.First().Value.Properties.First().First(x => x.Key == PortKeyDisplayName);
 
             var intPort = int.Parse(port.Value);
 

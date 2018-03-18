@@ -1,6 +1,7 @@
 ﻿using LanPartyHub.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace LanPartyHub
         public void Init(Game game)
         {
             _game = game;
-            var uriSource = new Uri($"/LanPartyHub;component/{game.ImagePath}", UriKind.Relative);
+            var uriSource = new Uri(@"C:\Users\paull\source\repos\LanPartyHub\LanPartyHub\Images\War2.jpg", UriKind.Absolute);
             GameIcon.Stretch = Stretch.UniformToFill;
             GameIcon.Source = new BitmapImage(uriSource);
         }

@@ -14,7 +14,8 @@ namespace LanPartyHub.Enumerations
             HandShakeTwo = 2,
             HandShakeThree = 3,
             Normal = 4,
-            GameStarted = 5
+            GameStarted = 5,
+            InitialConnection = 6
         }
     }
 
@@ -26,6 +27,12 @@ namespace LanPartyHub.Enumerations
             DOSBox = 2,
             MacOS = 3,
             Wine = 4
+        }
+
+        public enum eStartupType
+        {
+            Standard = 1,
+            Custom = 2
         }
     }
 }
