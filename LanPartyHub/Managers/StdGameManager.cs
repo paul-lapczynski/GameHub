@@ -11,6 +11,7 @@ namespace LanPartyHub.Managers
         {
             _gameId = gameId;
         }
+
         public DOSBoxOptions GetDOSBoxOptions(StdGameWindow context)
         {
             var gameSettings = ApplicationManager.Settings.Games.First(x => x.GameId == _gameId);

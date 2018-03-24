@@ -1,23 +1,12 @@
-﻿using LanPartyHub.Enumerations.GameHubConnectivity;
+﻿using LanPartyHub.Enumerations.Game;
 using LanPartyHub.Managers;
 using LanPartyHub.Models;
 using LanPartyHub.Utilities;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace LanPartyHub
 {
@@ -31,8 +20,14 @@ namespace LanPartyHub
 
         public MainWindow()
         {
-           InitializeComponent();
+            InitializeComponent();
             icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
+
+            foreach (var process in Process.GetProcessesByName("dns-sd.exe"))
+            {
+                process.Kill();
+            }
+
             Server = new GameHubServer();
             Client = new GameHubClient();
             Client.Connect();
@@ -59,12 +54,12 @@ namespace LanPartyHub
             var image = (GameImage)e.Source;
             var game = (Game)image.DataContext;
             // Standard Startup - uses StdGameWindow
-            if (game.StartupType == Enumerations.Game.eStartupType.Standard)
+            if (game.StartupType == eStartupType.Standard)
             {
                 StdGame_MouseDown(sender, e);
             }
             // Custom Startup - uses different game window
-            else if (game.StartupType == Enumerations.Game.eStartupType.Custom)
+            else if (game.StartupType == eStartupType.Custom)
             {
                 Doom2MouseDown(sender, e);
             }

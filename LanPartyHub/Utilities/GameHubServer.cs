@@ -1,17 +1,11 @@
-﻿using LanPartyHub.Enumerations;
-using LanPartyHub.Enumerations.GameHubConnectivity;
+﻿using LanPartyHub.Enumerations.GameHubConnectivity;
 using LanPartyHub.Helpers;
-using LanPartyHub.Interfaces;
 using LanPartyHub.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -62,9 +56,9 @@ namespace LanPartyHub.Utilities
 
         public void Dispose()
         {
-            if(DnsHostProcess != null)
+            if(DnsHostProcess != null && !DnsHostProcess.HasExited)
             {
-                DnsHostProcess.Kill();
+                DnsHostProcess.CloseMainWindow();
             }
 
             _tokenSource.Cancel();
