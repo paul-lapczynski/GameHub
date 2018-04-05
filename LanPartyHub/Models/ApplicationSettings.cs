@@ -11,5 +11,6 @@ namespace LanPartyHub.Models
         public List<Game> Games { get; set; }
         
         public string VirtualDOSBoxCDrivePath { get; set; }
+        public List<DOSBoxSetting> DOSBoxSettings { get; set; }
     }
 }

@@ -52,12 +52,12 @@ namespace LanPartyHub
             var image = (GameImage)e.Source;
             var game = (Game)image.DataContext;
             // Standard Startup - uses StdGameWindow
-            if (game.StartupType == Enumerations.Game.eStartupType.Standard)
+            if (game.StartupType == Enumerations.Game.EStartupType.Standard)
             {
                 StdGame_MouseDown(sender, e);
             }
             // Custom Startup - uses different game window
-            else if (game.StartupType == Enumerations.Game.eStartupType.Custom)
+            else if (game.StartupType == Enumerations.Game.EStartupType.Custom)
             {
                 Doom2MouseDown(sender, e);
             }

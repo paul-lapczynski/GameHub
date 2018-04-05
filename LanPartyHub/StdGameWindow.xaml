@@ -4,22 +4,31 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanPartyHub"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="GameWindow" Height="260" Width="325"
+        Title="GameWindow" Height="350" Width="500" 
         WindowStartupLocation="CenterOwner">
     <Grid Unloaded="Unload" Margin="0,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF727272" Offset="0"/>
                 <GradientStop Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}" Offset="0.84"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Name="StartGameButton" HorizontalAlignment="Center" VerticalAlignment="Center"  Click="StartStdGame" >
-            <TextBlock Name="StartGameText" TextWrapping="Wrap" TextAlignment="Center" MinWidth="125" MaxWidth="125" Padding="5,5,5,5"/>
-        </Button>
+
+        <TextBlock Name="StartGameText" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" MinWidth="125" MaxWidth="400" Padding="5,5,5,5" Text=""/>
+        <fa:ImageAwesome Icon="Cog" Cursor="Hand" Name="GameConfig" MouseDown="GameConfig_MouseDown" MouseEnter="GameConfig_MouseEnter" MouseLeave="GameConfig_MouseLeave" Height="40"  Width="490" Margin="0,0,10,0" HorizontalAlignment="Right"/>
+        <Image Name="GameImage" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Loaded="GameImage_Loaded" Grid.Row="1" MaxHeight="200" MaxWidth="300"></Image>
+        <Button Content="Multiplayer" Cursor="Hand" Name="StartMultiGameButton" VerticalAlignment="Center" Grid.Row="2" Height="36" Width="90" Margin="292,7,110,7" />
+        <Button Content="Start Game" Cursor="Hand" Name="StartGameButton" VerticalAlignment="Center" Click="StartStdGame" Grid.Row="2" Height="36" Width="90" Margin="392,7,10,7" />
     </Grid>
 </Window>

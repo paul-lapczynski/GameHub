@@ -10,7 +10,7 @@ using System.Windows;
 namespace LanPartyHub
 {
     /// <summary>
-    /// Interaction logic for War2Window.xaml
+    /// Interaction logic for DOSBoxConfig.xaml
     /// </summary>
     public partial class DOSBoxConfigWindow : Window
     {
@@ -58,7 +58,8 @@ namespace LanPartyHub
                 newGame.FolderPath = FolderName;
                 newGame.ExecutableName = FileName;
                 newGame.GameId = Guid.NewGuid().ToString();
-                newGame.StartupType = Enumerations.Game.eStartupType.Standard;
+                newGame.GameSettings = [];
+                newGame.StartupType = Enumerations.Game.EStartupType.Standard;
             }
 
             if (!string.IsNullOrEmpty(newGame.Name))
