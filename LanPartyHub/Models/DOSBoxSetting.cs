@@ -20,7 +20,7 @@ namespace LanPartyHub.Models
         /// Available option values to set the DOSBox setting
         /// Example: "true","false" 
         /// </summary>
-        public string Values { get; set; }
+        public List<string> Values { get; set; }
 
         /// <summary>
         /// Desription of the DOSBox setting

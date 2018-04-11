@@ -49,15 +49,23 @@
 
         <Label Content="DOSBox Game Settings" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,25,0,0"/>
         <Button Content="Add Setting" Name="AddSettingButton" Click="GameConfigAddSetting" Height="35" Width="90" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="37,50,37,0" />
-        <Button Content="Remove Setting" Name="RemoveSettingButton" Click="GameConfigRemoveSetting" Height="35" Width="90" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Margin="37,0,37,60" />
+        <Button Content="Remove Setting" Name="RemoveSettingButton" Click="GameConfigRemoveSetting" Height="35" Width="90" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" Margin="37,110,37,0" />
         <ListBox Name="listSettings" Grid.Row="3" Grid.Column="2" Margin="10,30,10,0" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Content="{Binding Key}"/>
+                    <Label Content="{Binding Value}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBlock Name="SettingDescription" Grid.Row="3" HorizontalAlignment="Left" Margin="15,152,10,0" Grid.ColumnSpan="2" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="auto"></TextBlock>
+        <TextBox Name="SettingDescription" Height="40" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="10,158,0,0"  VerticalAlignment="Top" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="IsReadOnly" Value="True" />
+                </Style>
+            </TextBox.Style>
+        </TextBox>
     </Grid>
+
 </Window>

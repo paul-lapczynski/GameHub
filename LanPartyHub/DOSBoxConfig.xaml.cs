@@ -58,7 +58,7 @@ namespace LanPartyHub
                 newGame.FolderPath = FolderName;
                 newGame.ExecutableName = FileName;
                 newGame.GameId = Guid.NewGuid().ToString();
-                newGame.GameSettings = [];
+                newGame.GameSettings = new List<KeyValue>();
                 newGame.StartupType = Enumerations.Game.EStartupType.Standard;
             }
 
