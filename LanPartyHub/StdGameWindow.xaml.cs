@@ -1,5 +1,4 @@
 ﻿using LanPartyHub.Managers;
-using LanPartyHub.Models;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -26,7 +25,7 @@ namespace LanPartyHub
             stdGameManager = new StdGameManager(gameId);
 
             InitializeComponent();
-            Title = ApplicationManager.Settings.Games.First( game => game.GameId == gameId ).Name;
+            Title = GameManager.Settings.Games.First( game => game.GameId == gameId ).Name;
             StartGameText.Text = Title;
             Closed += StdGameWindow_Closed;
         }
@@ -47,7 +46,7 @@ namespace LanPartyHub
         private void GameImage_Loaded(object sender, RoutedEventArgs e)
         {
             // Create a new BitmapImage.
-            var image = ApplicationManager.Settings.Games.First(game => game.GameId == _gameid).ImagePath;
+            var image = GameManager.Settings.Games.First(game => game.GameId == _gameid).ImagePath;
             BitmapImage b = new BitmapImage();
             b.BeginInit();
             b.UriSource = new Uri(image);

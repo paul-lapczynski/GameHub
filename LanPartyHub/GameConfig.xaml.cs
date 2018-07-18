@@ -23,7 +23,7 @@ namespace LanPartyHub
         {
             _main = main;
             _gameid = gameId;
-            _game = ApplicationManager.Settings.Games.First(game => game.GameId == _gameid);
+            _game = GameManager.Settings.Games.First(game => game.GameId == _gameid);
             InitializeComponent();
             GamePath.Text = _game.FolderPath + "\\" + _game.ExecutableName;
             GameImagePath.Text = _game.ImagePath;
@@ -52,13 +52,14 @@ namespace LanPartyHub
         private void GameConfigSave(object sender, RoutedEventArgs e)
         {
             if (GamePath.Text.Length > 0) {
-                _game.FolderPath = GamePath.Text;
+                _game.FolderPath = Path.GetDirectoryName(GamePath.Text);
+                _game.ExecutableName = Path.GetFileName(GamePath.Text);
             }
             if (GameImagePath.Text.Length > 0) {
                 _game.ImagePath = GameImagePath.Text;
             }
             
-            ApplicationManager.SaveSettings();
+            GameManager.SaveSettings();
         }
 
         private void SettingsDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,7 +87,7 @@ namespace LanPartyHub
                 setting.Key = key;
                 setting.Value = value;
                 _game.GameSettings.Add(setting);
-                ApplicationManager.SaveSettings();
+                GameManager.SaveSettings();
 
                 List<KeyValue> settings = new List<KeyValue>();
                 _game.GameSettings.ToList().ForEach(item =>
@@ -113,7 +114,7 @@ namespace LanPartyHub
             });
 
             _game.GameSettings.Remove(setting);
-            ApplicationManager.SaveSettings();
+            GameManager.SaveSettings();
 
             List<KeyValue> settings = new List<KeyValue>();
             _game.GameSettings.ToList().ForEach(item =>

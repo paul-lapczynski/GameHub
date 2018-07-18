@@ -115,6 +115,8 @@
     <Compile Include="Enumerations\GameHubEnumerations.cs" />
     <Compile Include="Helpers\GameHubConnectivity.cs" />
     <Compile Include="Interfaces\IGameHubMessage.cs" />
+    <Compile Include="Managers\GameManager.cs" />
+    <Compile Include="Models\GameSettings.cs" />
     <Compile Include="Models\Connectivity\QueueChangeEventArgs.cs" />
     <Compile Include="Models\DOSBoxSetting.cs" />
     <Compile Include="Models\GameHubConnectionClient.cs" />
@@ -201,6 +203,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Games.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
