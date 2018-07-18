@@ -73,7 +73,14 @@ namespace LanPartyHub
         private void GameConfigAddSetting(object sender, RoutedEventArgs e)
         {
             var key = ((LanPartyHub.Models.DOSBoxSetting)SettingDropdown.SelectedItem).Key.ToString();
-            var value = ValueDropdown.SelectedValue.ToString();
+            string value;
+            if (ValueDropdown.SelectedItem != null)
+            {
+                value = ValueDropdown.SelectedValue.ToString();
+            }
+            else {
+                return;
+            }
             if (key.Length > 0 && value.Length > 0) {
                 var setting = new KeyValue();
                 setting.Key = key;
