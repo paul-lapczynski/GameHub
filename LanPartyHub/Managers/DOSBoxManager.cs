@@ -1,14 +1,7 @@
 ﻿using LanPartyHub.Models.DOSBox;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using LanPartyHub.Properties;
 namespace LanPartyHub.Managers
 {
     /// <summary>
