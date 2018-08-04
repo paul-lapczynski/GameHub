@@ -40,8 +40,11 @@ namespace LanPartyHub
 
                 listSettings.ItemsSource = settings.ToList();
             }
-
+            SettingDropdown.DisplayMemberPath = "Key";
+            SettingDropdown.SelectedValuePath = "Key";
             SettingDropdown.ItemsSource = ApplicationManager.Settings.DOSBoxSettings.ToList();
+
+ 
         }
 
         private void Unload(object sender, RoutedEventArgs e)
@@ -86,8 +89,20 @@ namespace LanPartyHub
                 var setting = new KeyValue();
                 setting.Key = key;
                 setting.Value = value;
-                _game.GameSettings.Add(setting);
-                GameManager.SaveSettings();
+
+                Boolean found = false;
+                for (int i = 0; i < _game.GameSettings.Count; i++) {
+                    if (setting.Key == _game.GameSettings[i].Key) {
+                        found = true;
+                        _game.GameSettings[i].Value = setting.Value;
+                    }
+
+                }
+                if (found == false) {
+                    _game.GameSettings.Add(setting);
+                }
+
+                GameManager.SaveSettings();             
 
                 List<KeyValue> settings = new List<KeyValue>();
                 _game.GameSettings.ToList().ForEach(item =>
@@ -104,28 +119,25 @@ namespace LanPartyHub
 
         private void GameConfigRemoveSetting(object sender, RoutedEventArgs e)
         {
-            var setting = new KeyValue();
-            _game.GameSettings.ToList().ForEach(item =>
-            {
-                if (((LanPartyHub.Models.DOSBoxSetting)SettingDropdown.SelectedItem).Key.ToString() == item.Key)
+            if (listSettings.SelectedItem != null) {
+                var key = ((LanPartyHub.Models.KeyValue)listSettings.SelectedItem).Key.ToString();
+                var selected = _game.GameSettings.First(KeyValue => KeyValue.Key == key);
+
+                _game.GameSettings.Remove(selected);
+                GameManager.SaveSettings();
+
+                List<KeyValue> settings = new List<KeyValue>();
+                _game.GameSettings.ToList().ForEach(item =>
                 {
-                    setting = item;
-                }
-            });
+                    var newitem = new KeyValue();
+                    newitem.Key = item.Key;
+                    newitem.Value = item.Key + " - " + item.Value;
+                    settings.Add(newitem);
+                });
 
-            _game.GameSettings.Remove(setting);
-            GameManager.SaveSettings();
+                listSettings.ItemsSource = settings.ToList();
+            }
 
-            List<KeyValue> settings = new List<KeyValue>();
-            _game.GameSettings.ToList().ForEach(item =>
-            {
-                var newitem = new KeyValue();
-                newitem.Key = item.Key;
-                newitem.Value = item.Key + " - " + item.Value;
-                settings.Add(newitem);
-            });
-
-            listSettings.ItemsSource = settings.ToList();
         }
     }
 }
