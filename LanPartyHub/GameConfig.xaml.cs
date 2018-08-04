@@ -40,8 +40,11 @@ namespace LanPartyHub
 
                 listSettings.ItemsSource = settings.ToList();
             }
-
+            SettingDropdown.DisplayMemberPath = "Key";
+            SettingDropdown.SelectedValuePath = "Key";
             SettingDropdown.ItemsSource = ApplicationManager.Settings.DOSBoxSettings.ToList();
+
+ 
         }
 
         private void Unload(object sender, RoutedEventArgs e)
@@ -73,20 +76,49 @@ namespace LanPartyHub
 
         private void GameConfigAddSetting(object sender, RoutedEventArgs e)
         {
-            var key = ((LanPartyHub.Models.DOSBoxSetting)SettingDropdown.SelectedItem).Key.ToString();
-            string value;
+            var setting = new KeyValue {
+                Key = ((LanPartyHub.Models.DOSBoxSetting)SettingDropdown.SelectedItem).Key.ToString(),
+                Value = ""
+            };
+
             if (ValueDropdown.SelectedItem != null)
             {
-                value = ValueDropdown.SelectedValue.ToString();
+                setting.Value = ValueDropdown.SelectedValue.ToString();
             }
             else {
                 return;
             }
-            if (key.Length > 0 && value.Length > 0) {
-                var setting = new KeyValue();
-                setting.Key = key;
-                setting.Value = value;
+
+            var exists = _game.GameSettings.FirstOrDefault(KeyValue => KeyValue.Key == setting.Key);
+            if (exists != null)
+            {
+                exists.Value = setting.Value;
+            }
+            else {
                 _game.GameSettings.Add(setting);
+            }
+
+            GameManager.SaveSettings();             
+
+            List<KeyValue> settings = new List<KeyValue>();
+            _game.GameSettings.ToList().ForEach(item =>
+            {
+                var newitem = new KeyValue();
+                newitem.Key = item.Key;
+                newitem.Value = item.Key + " - " + item.Value;
+                settings.Add(newitem);
+            });
+
+            listSettings.ItemsSource = settings.ToList();
+        }
+
+        private void GameConfigRemoveSetting(object sender, RoutedEventArgs e)
+        {
+            if (listSettings.SelectedItem != null) {
+                var key = ((LanPartyHub.Models.KeyValue)listSettings.SelectedItem).Key.ToString();
+                var selected = _game.GameSettings.First(KeyValue => KeyValue.Key == key);
+
+                _game.GameSettings.Remove(selected);
                 GameManager.SaveSettings();
 
                 List<KeyValue> settings = new List<KeyValue>();
@@ -100,32 +132,7 @@ namespace LanPartyHub
 
                 listSettings.ItemsSource = settings.ToList();
             }
-        }
 
-        private void GameConfigRemoveSetting(object sender, RoutedEventArgs e)
-        {
-            var setting = new KeyValue();
-            _game.GameSettings.ToList().ForEach(item =>
-            {
-                if (((LanPartyHub.Models.DOSBoxSetting)SettingDropdown.SelectedItem).Key.ToString() == item.Key)
-                {
-                    setting = item;
-                }
-            });
-
-            _game.GameSettings.Remove(setting);
-            GameManager.SaveSettings();
-
-            List<KeyValue> settings = new List<KeyValue>();
-            _game.GameSettings.ToList().ForEach(item =>
-            {
-                var newitem = new KeyValue();
-                newitem.Key = item.Key;
-                newitem.Value = item.Key + " - " + item.Value;
-                settings.Add(newitem);
-            });
-
-            listSettings.ItemsSource = settings.ToList();
         }
     }
 }

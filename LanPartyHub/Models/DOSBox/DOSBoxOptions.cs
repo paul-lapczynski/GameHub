@@ -15,5 +15,7 @@ namespace LanPartyHub.Models.DOSBox
         public string Arguments { get; set; }
 
         public bool Fullscreen { get; set; }
+
+        public List<KeyValue> GameOptions { get; set; }
     }
 }
