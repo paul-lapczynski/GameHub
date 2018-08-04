@@ -38,7 +38,6 @@ namespace LanPartyHub.Managers
             }
 
             // Fullscreen
-            //if (options.Fullscreen) { args.Append(" -fullscreen"); }
             for (int i = 0; i < options.GameOptions.Count; i++)
             {
                 if (options.GameOptions[i].Key == "fullscreen") {
