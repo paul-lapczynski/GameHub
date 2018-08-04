@@ -89,14 +89,12 @@ namespace LanPartyHub
                 return;
             }
 
-            Boolean found = false;
-            for (int i = 0; i < _game.GameSettings.Count; i++) {
-                if (setting.Key == _game.GameSettings[i].Key) {
-                    found = true;
-                    _game.GameSettings[i].Value = setting.Value;
-                }
+            var exists = _game.GameSettings.FirstOrDefault(KeyValue => KeyValue.Key == setting.Key);
+            if (exists != null)
+            {
+                exists.Value = setting.Value;
             }
-            if (found == false) {
+            else {
                 _game.GameSettings.Add(setting);
             }
 
