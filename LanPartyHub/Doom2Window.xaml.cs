@@ -79,5 +79,32 @@ namespace LanPartyHub
                 TurboPercentage.Content = Math.Floor(e.NewValue) + "%";
             }
         }
+
+        private void Button_JoinClick(object sender, RoutedEventArgs e)
+        {
+            var dosBoxOptions = doomManager.GetDOSBoxOptions(this, false);
+
+            var multiplayerWindow = new MultiplayerClientWindow(new MultiplayerOptions
+            {
+                Game = DOSBoxManager.GetUnstartedProcess(dosBoxOptions),
+            });
+            multiplayerWindow.Show();
+            //Hide();
+        }
+
+        private void Button_StartClick(object sender, RoutedEventArgs e)
+        {
+            var dosBoxOptions = doomManager.GetDOSBoxOptions(this);
+
+            var multiplayerWindow = new MultiplayerHostWindow(new MultiplayerOptions
+            {
+                NumberOfPlayers = 2,
+                Game = DOSBoxManager.GetUnstartedProcess(dosBoxOptions),
+                GameArguments = dosBoxOptions.Arguments
+            });
+
+            multiplayerWindow.Show();
+            //Hide();
+        }
     }
 }

@@ -121,8 +121,13 @@ namespace LanPartyHub.Helpers
 
         public static void SendMessageToClient(GameHubConnectionClient client, GameHubMessage message)
         {
+            SendMessageToClient(client.Connection, message);
+        }
+
+        public static void SendMessageToClient(TcpClient client, GameHubMessage message)
+        {
             var jsonBytes = GameHubMessage.GetBytes(message);
-            var stream = client.Connection.GetStream();
+            var stream = client.GetStream();
 
             if (stream.CanWrite)
             {
@@ -139,7 +144,7 @@ namespace LanPartyHub.Helpers
             {
                 host = await InternalResolveServerHost();
 
-                if(host != null)
+                if (host != null)
                 {
                     break;
                 }

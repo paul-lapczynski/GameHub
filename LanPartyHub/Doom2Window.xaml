@@ -32,5 +32,7 @@
         <Slider x:Name="TurboSlider" HorizontalAlignment="Left" Margin="94,261,0,0" VerticalAlignment="Top" Height="14" Width="200" ValueChanged="TurboSlider_ValueChanged" SmallChange="1" Value="100" Maximum="400" LargeChange="10"/>
         <Label x:Name="TurboPercentage" Content="100%" HorizontalAlignment="Left" Margin="163,235,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.881,0.423" Height="25" Width="44"/>
         <CheckBox x:Name="UseTimerCheckbox" Content="Timed Match - " HorizontalAlignment="Left" Margin="72,295,0,0" VerticalAlignment="Top"/>
+        <Button Content="Join Multiplayer" HorizontalAlignment="Left" Height="34" Margin="529,375,0,0" VerticalAlignment="Top" Width="121" Click="Button_JoinClick"/>
+        <Button Content="Start Multiplayer" HorizontalAlignment="Left" Height="34" Margin="403,375,0,0" VerticalAlignment="Top" Width="121" Click="Button_StartClick"/>
     </Grid>
 </Window>

@@ -132,7 +132,7 @@ namespace LanPartyHub.Managers
             return JsonFileHelper.ReadAsObject<DoomInfo>(directory);
         }
 
-        public DOSBoxOptions GetDOSBoxOptions(Doom2Window context)
+        public DOSBoxOptions GetDOSBoxOptions(Doom2Window context, bool includeArguments = true)
         {
             var gameSettings = ApplicationManager.Settings.Games.First(x => x.GameId == _gameId);
 
@@ -141,7 +141,7 @@ namespace LanPartyHub.Managers
                 ExeFolderPath = gameSettings.FolderPath,
                 ExeName = gameSettings.ExecutableName,
                 Fullscreen = true,
-                Arguments = GetDoomArguments(new DoomArguments
+                Arguments = includeArguments ? GetDoomArguments(new DoomArguments
                 {
                     StartLevel = ((KeyValue)context.LevelDropdown.SelectedItem).Key,
                     Turbo = context.TurboCheckbox.IsChecked,
@@ -153,7 +153,7 @@ namespace LanPartyHub.Managers
                     SkillLevel = (string)context.SkillLevelDropdown.SelectedValue,
                     Timer = (int)Math.Floor(context.TimerSlider.Value),
                     UseTimer = context.UseTimerCheckbox.IsChecked
-                })
+                }) : string.Empty
             };
         }
     }

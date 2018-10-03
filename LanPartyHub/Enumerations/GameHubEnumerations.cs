@@ -10,12 +10,11 @@ namespace LanPartyHub.Enumerations
     {
         public enum eMessageType
         {
-            HandShakeOne = 1,
-            HandShakeTwo = 2,
-            HandShakeThree = 3,
-            Normal = 4,
+            InitialClientConnection = 1,
+            InitialServerConnection = 2,
+            PlayerJoined = 3,
+            PlayerLeft = 4,
             GameStarted = 5,
-            InitialConnection = 6
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using LanPartyHub.Helpers;
+using LanPartyHub.Interfaces;
 using LanPartyHub.Models.Connectivity;
 using LanPartyHub.Utilities;
 using Newtonsoft.Json;
@@ -27,6 +28,10 @@ namespace LanPartyHub.Models
         public object ReadWriteBlocker = new object();
 
         public GameHubMessageQueue MessageQueue { get; private set; }
+
+        public delegate void MessageRecieved(object sender, List<IGameHubMessage> message);
+
+        public event MessageRecieved MessageReceived;
 
         public GameHubClient()
         {
@@ -65,9 +70,9 @@ namespace LanPartyHub.Models
                 Connection.Connect(serverIpAddress, serverIp);
                 Subscribe();
             }
-            catch
+            catch(Exception e)
             {
-                // I should probably doo something hurrrr
+                throw e;
             }
         }
 
@@ -85,6 +90,8 @@ namespace LanPartyHub.Models
             var messages = args.Messages;
 
             Console.WriteLine(JsonConvert.SerializeObject(messages));
+
+            MessageReceived(sender, messages);
         }
 
         public void Dispose()
@@ -99,6 +106,18 @@ namespace LanPartyHub.Models
             {
                 Connection.Close();
                 Connection.Dispose();
+            }
+        }
+
+        public void SendMessageToServer(GameHubMessage message)
+        {
+            var jsonBytes = GameHubMessage.GetBytes(message);
+            var stream = Connection.GetStream();
+
+            if (stream.CanWrite)
+            {
+                stream.Write(jsonBytes, 0, jsonBytes.Length);
+                stream.Flush();
             }
         }
     }

@@ -58,7 +58,7 @@ namespace LanPartyHub.Utilities
             {
                 args.Messages = GetAllMessages();
 
-                if (args.Messages.Any())
+                if (args.Messages.Any() && MessagesAdded != null)
                 {
                     MessagesAdded(this, args);
                 }

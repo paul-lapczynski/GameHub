@@ -2,18 +2,12 @@
   "Games": [
     {
       "Name": "Doom 2",
-      "FolderPath": "Doom2\\",
+      "FolderPath": "doomiido\\",
       "ExecutableName": "DOOM2.EXE",
       "GameId": 1,
-      "ImagePath": "Images/Doom2_title.png"
-    },
-	{
-      "Name": "Warcraft 2",
-      "FolderPath": "Warcraft 2\\",
-      "ExecutableName": "war2.EXE",
-      "GameId": 2,
-      "ImagePath": "Images/War2.jpg"
+      "ImagePath": "C:\\Users\\paull\\source\\repos\\LanPartyHub\\LanPartyHub\\Images\\Doom2_title.png",
+      "StartupType": "2"
     }
   ],
-  "VirtualDOSBoxCDrivePath": "C:\\Games\\DOS"
+  "VirtualDOSBoxCDrivePath": "D:\\Games\\DOSBoxC"
 }

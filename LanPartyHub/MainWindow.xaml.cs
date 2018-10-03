@@ -15,9 +15,6 @@ namespace LanPartyHub
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameHubServer Server;
-        GameHubClient Client;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -27,18 +24,6 @@ namespace LanPartyHub
             {
                 process.Kill();
             }
-
-            Server = new GameHubServer();
-            Client = new GameHubClient();
-            Client.Connect();
-
-            Closed += MainWindow_Closed;
-        }
-
-        private void MainWindow_Closed(object sender, EventArgs e)
-        {
-            Server.Dispose();
-            Client.Dispose();
         }
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)

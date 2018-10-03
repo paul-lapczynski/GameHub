@@ -34,6 +34,19 @@ namespace LanPartyHub.Managers
             });
         }
 
+        public static Process GetUnstartedProcess(DOSBoxOptions options)
+        {
+            return new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory = workingDirectory,
+                    FileName = exe,
+                    Arguments = GetDOSBoxArguments(options)
+                }
+            };
+        }
+
         private static string GetDOSBoxArguments(DOSBoxOptions options)
         {
             var args = new StringBuilder($"-c \"mount c '{DOSBoxC}\\{options.ExeFolderPath}'\"");
