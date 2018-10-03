@@ -39,6 +39,11 @@ namespace LanPartyHub.Models
         /// <summary>
         /// Startup type for an individual game
         /// </summary>
-        public eStartupType StartupType { get; set; }
+        public EStartupType StartupType { get; set; }
+
+        /// <summary>
+        /// DOSBox Settings individual game
+        /// </summary>
+        public List<KeyValue> GameSettings { get; set; }
     }
 }

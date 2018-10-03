@@ -87,7 +87,7 @@ namespace LanPartyHub.Utilities
                         {
                             SenderGamePort = ((IPEndPoint)Server.LocalEndpoint).Port,
                             Text = "Welcome to the GameHub Server. I hope you enjoy yourself",
-                            Status = eMessageType.Normal
+                            Status = EMessageType.Normal
                         };
 
                         NotifyClient(gameHubClient, message);
