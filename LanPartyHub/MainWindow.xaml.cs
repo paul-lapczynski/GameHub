@@ -1,6 +1,8 @@
 ﻿using LanPartyHub.Managers;
 using LanPartyHub.Models;
 using LanPartyHub.Utilities;
+using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -18,7 +20,7 @@ namespace LanPartyHub
         public MainWindow()
         {
             InitializeComponent();
-            icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
+            icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
 
             foreach (var process in Process.GetProcessesByName("dns-sd.exe"))
             {
