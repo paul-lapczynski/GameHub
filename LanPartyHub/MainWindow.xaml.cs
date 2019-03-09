@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-
+using LanPartyHub.Enumerations.Game;
 namespace LanPartyHub
 {
     /// <summary>
@@ -14,9 +14,6 @@ namespace LanPartyHub
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameHubServer Server;
-        GameHubClient Client;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -26,25 +23,14 @@ namespace LanPartyHub
             {
                 process.Kill();
             }
-
-            icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
-            Server = new GameHubServer();
-            Client = new GameHubClient();
-            Client.Connect();
-
-            Closed += MainWindow_Closed;
-        }
-
-        private void MainWindow_Closed(object sender, EventArgs e)
-        {
-            Server.Dispose();
-            Client.Dispose();
         }
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
-            doomWindow.Owner = Application.Current.MainWindow;
+            var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId)
+            {
+                Owner = Application.Current.MainWindow
+            };
             doomWindow.Show();
             Hide();
         }
@@ -54,12 +40,12 @@ namespace LanPartyHub
             var image = (GameImage)e.Source;
             var game = (Game)image.DataContext;
             // Standard Startup - uses StdGameWindow
-            if (game.StartupType == Enumerations.Game.EStartupType.Standard)
+            if (game.StartupType == EStartupType.Standard)
             {
                 StdGame_MouseDown(sender, e);
             }
             // Custom Startup - uses different game window
-            else if (game.StartupType == Enumerations.Game.EStartupType.Custom)
+            else if (game.StartupType == EStartupType.Custom)
             {
                 Doom2MouseDown(sender, e);
             }

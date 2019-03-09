@@ -11,7 +11,6 @@ namespace LanPartyHub.Models
         private static readonly string EndOfMessageSeperator = "[<end-of-message>]";
         private static readonly string[] EndOfMessageSplitter = new string[] { "[<end-of-message>]" };
 
-        public bool GameStarted { get; set; }
         public int SenderGamePort { get; set; }
         public string Text { get; set; }
         public EMessageType Status { get; set; }

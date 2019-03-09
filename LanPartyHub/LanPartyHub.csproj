@@ -114,9 +114,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Models\MultiplayerOptions.cs" />
     <Page Include="DOSBoxConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MultiplayerHostWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MultiplayerClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StdGameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +142,12 @@
     <Compile Include="Models\Connectivity\QueueChangeEventArgs.cs" />
     <Compile Include="Models\DOSBoxSetting.cs" />
     <Compile Include="Models\GameHubConnectionClient.cs" />
+    <Compile Include="MultiplayerHostWindow.xaml.cs">
+      <DependentUpon>MultiplayerHostWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MultiplayerClientWindow.xaml.cs">
+      <DependentUpon>MultiplayerClientWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\GameHubClient.cs" />
     <Compile Include="Models\GameHubMessage.cs" />
     <Compile Include="Utilities\GameHubMessageQueue.cs" />

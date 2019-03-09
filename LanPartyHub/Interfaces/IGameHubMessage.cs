@@ -10,8 +10,6 @@ namespace LanPartyHub.Interfaces
 {
     public interface IGameHubMessage
     {
-        bool GameStarted { get; set; }
-
         int SenderGamePort { get; set; }
 
         string Text { get; set; }

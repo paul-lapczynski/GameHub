@@ -1,6 +1,9 @@
 ﻿using LanPartyHub.Enumerations.GameHubConnectivity;
 using LanPartyHub.Helpers;
+using LanPartyHub.Interfaces;
 using LanPartyHub.Models;
+using LanPartyHub.Models.Connectivity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,16 +18,20 @@ namespace LanPartyHub.Utilities
     {
         private static readonly object _clientsLock = new object();
         private List<GameHubConnectionClient> _clients;
-        public GameHubMessageQueue MessageQueue { get; private set; }
         private CancellationTokenSource _tokenSource;
         private Process DnsHostProcess;
+
+        public GameHubMessageQueue MessageQueue { get; private set; }
         public TcpListener Server { get; private set; }
+        public delegate void MessageRecieved(object sender, List<IGameHubMessage> message);
+        public event MessageRecieved MessageReceived;
 
         public GameHubServer()
         {
             _clients = new List<GameHubConnectionClient>();
             _tokenSource = new CancellationTokenSource();
             MessageQueue = new GameHubMessageQueue();
+            MessageQueue.MessagesAdded += HandleMessagesAdded;
 
             Start();
         }
@@ -83,11 +90,13 @@ namespace LanPartyHub.Utilities
                             _clients.Add(gameHubClient);
                         }
 
+                        GameHubConnectivity.Subscribe(client, MessageQueue, TimeSpan.FromMilliseconds(200), token);
+
                         var message = new GameHubMessage
                         {
                             SenderGamePort = ((IPEndPoint)Server.LocalEndpoint).Port,
                             Text = "Welcome to the GameHub Server. I hope you enjoy yourself",
-                            Status = EMessageType.Normal
+                            Status = EMessageType.InitialServerConnection
                         };
 
                         NotifyClient(gameHubClient, message);
@@ -118,6 +127,15 @@ namespace LanPartyHub.Utilities
             {
                 return;
             }
+        }
+
+        private void HandleMessagesAdded(object sender, QueueChangeEventArgs args)
+        {
+            var messages = args.Messages;
+
+            Console.WriteLine(JsonConvert.SerializeObject(messages));
+
+            MessageReceived(sender, messages);
         }
     }
 }
