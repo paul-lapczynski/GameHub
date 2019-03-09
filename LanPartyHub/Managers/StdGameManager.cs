@@ -14,13 +14,15 @@ namespace LanPartyHub.Managers
 
         public DOSBoxOptions GetDOSBoxOptions(StdGameWindow context)
         {
-            var gameSettings = ApplicationManager.Settings.Games.First(x => x.GameId == _gameId);
+            var gameSettings = GameManager.Settings.Games.First(x => x.GameId == _gameId);
 
             return new DOSBoxOptions
             {
                 ExeFolderPath = gameSettings.FolderPath,
                 ExeName = gameSettings.ExecutableName,
-                Fullscreen = true
+                Fullscreen = false,
+                GameOptions = gameSettings.GameSettings
+
             };
         }
     }

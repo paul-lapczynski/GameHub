@@ -54,7 +54,7 @@ namespace LanPartyHub
             {
                 switch (msg.Status)
                 {
-                    case eMessageType.InitialServerConnection:
+                    case EMessageType.InitialServerConnection:
                         {
                             Players.Add(msg.Text);
                             gameIp = msg.SenderGamePort;
@@ -66,12 +66,12 @@ namespace LanPartyHub
 
                             Client.SendMessageToServer(new GameHubMessage
                             {
-                                Status = eMessageType.PlayerJoined
+                                Status = EMessageType.PlayerJoined
                             });
 
                             break;
                         }
-                    case eMessageType.PlayerJoined:
+                    case EMessageType.PlayerJoined:
                         {
                             Players = JsonConvert.DeserializeObject<List<string>>(msg.Text);
 
@@ -82,7 +82,7 @@ namespace LanPartyHub
 
                             break;
                         }
-                    case eMessageType.GameStarted:
+                    case EMessageType.GameStarted:
                         {
                             Dispatcher.Invoke(() =>
                             {

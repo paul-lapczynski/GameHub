@@ -8,7 +8,7 @@ namespace LanPartyHub.Enumerations
 {
     namespace GameHubConnectivity
     {
-        public enum eMessageType
+        public enum EMessageType
         {
             InitialClientConnection = 1,
             InitialServerConnection = 2,
@@ -20,7 +20,7 @@ namespace LanPartyHub.Enumerations
 
     namespace Game
     {
-        public enum eProvider
+        public enum EProvider
         {
             Windows = 1,
             DOSBox = 2,
@@ -28,7 +28,7 @@ namespace LanPartyHub.Enumerations
             Wine = 4
         }
 
-        public enum eStartupType
+        public enum EStartupType
         {
             Standard = 1,
             Custom = 2

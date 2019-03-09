@@ -13,7 +13,7 @@ namespace LanPartyHub.Models
 
         public int SenderGamePort { get; set; }
         public string Text { get; set; }
-        public eMessageType Status { get; set; }
+        public EMessageType Status { get; set; }
 
         public GameHubMessage()
         {

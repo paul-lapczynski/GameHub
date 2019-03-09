@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace LanPartyHub.Managers
 {
@@ -134,7 +132,7 @@ namespace LanPartyHub.Managers
 
         public DOSBoxOptions GetDOSBoxOptions(Doom2Window context, bool includeArguments = true)
         {
-            var gameSettings = ApplicationManager.Settings.Games.First(x => x.GameId == _gameId);
+            var gameSettings = GameManager.Settings.Games.First(x => x.GameId == _gameId);
 
             return new DOSBoxOptions
             {

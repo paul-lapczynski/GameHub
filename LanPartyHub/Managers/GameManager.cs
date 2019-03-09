@@ -4,11 +4,11 @@ using System.IO;
 
 namespace LanPartyHub.Managers
 {
-    static public class ApplicationManager
+    static public class GameManager
     {
-        static private ApplicationSettings _settings;
+        static private GameSettings _settings;
 
-        static public ApplicationSettings Settings
+        static public GameSettings Settings
         {
             get
             {
@@ -28,7 +28,7 @@ namespace LanPartyHub.Managers
 
         static public void SaveSettings()
         {
-            var directory = Directory.GetCurrentDirectory() + @"\Settings.json";
+            var directory = Directory.GetCurrentDirectory() + @"\Games.json";
             try
             {
                 JsonFileHelper.CreateFileFromObject(directory, Settings);
@@ -41,15 +41,15 @@ namespace LanPartyHub.Managers
 
         private static void LoadAppSettings()
         {
-            var directory = Directory.GetCurrentDirectory() + @"\Settings.json";
+            var directory = Directory.GetCurrentDirectory() + @"\Games.json";
             
             try
             {
-                _settings = JsonFileHelper.ReadAsObject<ApplicationSettings>(directory);
+                _settings = JsonFileHelper.ReadAsObject<GameSettings>(directory);
             }
             catch(FileNotFoundException)
             {
-                JsonFileHelper.CreateFileFromObject(directory, new ApplicationSettings());
+                JsonFileHelper.CreateFileFromObject(directory, new GameSettings());
             }
         }
     }

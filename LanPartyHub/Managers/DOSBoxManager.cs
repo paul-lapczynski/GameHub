@@ -1,14 +1,8 @@
-﻿using LanPartyHub.Models.DOSBox;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using LanPartyHub.Models;
+using LanPartyHub.Models.DOSBox;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using LanPartyHub.Properties;
 namespace LanPartyHub.Managers
 {
     /// <summary>
@@ -49,16 +43,50 @@ namespace LanPartyHub.Managers
 
         private static string GetDOSBoxArguments(DOSBoxOptions options)
         {
-            var args = new StringBuilder($"-c \"mount c '{DOSBoxC}\\{options.ExeFolderPath}'\"");
-            args.Append(" -c \"C:\"");
-            args.Append($"-c \"{options.ExeName} {options.Arguments}\"");
+            var args = new StringBuilder();
 
-            if (options.Fullscreen)
+            // Game config options
+            if(options.GameOptions != null)
             {
-                args.Append(" -fullscreen");
+                foreach (KeyValue option in options.GameOptions)
+                {
+                    args.Append(" -c \"SET " + option.Key + "=" + option.Value + "\" ");
+                }
+
+                foreach(KeyValue option in options.GameOptions)
+                {
+                    if (option.Key == "fullscreen")
+                    {
+                        if (option.Value == "true")
+                        {
+                            args.Append(" -fullscreen");
+                        }
+                    }
+                }
             }
 
+
+            // Fullscreen
+            //for (int i = 0; i < options.GameOptions.Count; i++)
+            //{
+            //    if (options.GameOptions[i].Key == "fullscreen") {
+            //        if (options.GameOptions[i].Value == "true") {
+            //            args.Append(" -fullscreen");
+            //        }
+            //    } 
+            //}
+
+            // Mount drive and start game
+            args.Append(" -c \"C:\"");
+            args.Append($"-c \"mount c '{DOSBoxC}\\{options.ExeFolderPath}'\"");
+            args.Append(" -c \"C:\"");      
+            args.Append($"-c \"{options.ExeName} {options.Arguments}\"");       
+
+            // auto exit dosbox after exe
+            //args.Append(" -c \"exit\"");
+
             return args.ToString();
+            
         }
     }
 }

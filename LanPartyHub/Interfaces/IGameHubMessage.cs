@@ -14,6 +14,6 @@ namespace LanPartyHub.Interfaces
 
         string Text { get; set; }
 
-        eMessageType Status { get; set; }
+        EMessageType Status { get; set; }
     }
 }

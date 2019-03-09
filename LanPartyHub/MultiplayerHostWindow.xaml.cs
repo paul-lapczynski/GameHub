@@ -48,7 +48,7 @@ namespace LanPartyHub
             {
                 switch (msg.Status)
                 {
-                    //case eMessageType.InitialClientConnection:
+                    //case EMessageType.InitialClientConnection:
                     //    {
                     //        Players.Add($"Pablo {Players.Count}");
                     //        Dispatcher.Invoke(() =>
@@ -58,13 +58,13 @@ namespace LanPartyHub
 
                     //        //Server.NotifyClients(new GameHubMessage
                     //        //{
-                    //        //    Status = eMessageType.InitialConnection,
+                    //        //    Status = EMessageType.InitialConnection,
                     //        //    Text = JsonConvert.SerializeObject(Players)
                     //        //});
 
                     //        break;
                     //    }
-                    case eMessageType.PlayerJoined:
+                    case EMessageType.PlayerJoined:
                         {
                             if (Server != null)
                             {
@@ -78,14 +78,14 @@ namespace LanPartyHub
 
                             Server.NotifyClients(new GameHubMessage
                             {
-                                Status = eMessageType.PlayerJoined,
+                                Status = EMessageType.PlayerJoined,
                                 Text = JsonConvert.SerializeObject(Players)
                             });
 
                             break;
                         }
 
-                        //case eMessageType.Normal:
+                        //case EMessageType.Normal:
                         //    {
                         //        if (Server != null)
                         //        {
@@ -113,7 +113,7 @@ namespace LanPartyHub
 
             Server.NotifyClients(new GameHubMessage
             {
-                Status = eMessageType.GameStarted,
+                Status = EMessageType.GameStarted,
                 Text = Options.GameArguments
             });
 

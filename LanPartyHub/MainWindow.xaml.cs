@@ -1,5 +1,4 @@
-﻿using LanPartyHub.Enumerations.Game;
-using LanPartyHub.Managers;
+﻿using LanPartyHub.Managers;
 using LanPartyHub.Models;
 using LanPartyHub.Utilities;
 using System;
@@ -7,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-
+using LanPartyHub.Enumerations.Game;
 namespace LanPartyHub
 {
     /// <summary>
@@ -18,7 +17,7 @@ namespace LanPartyHub
         public MainWindow()
         {
             InitializeComponent();
-            icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
+            icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
 
             foreach (var process in Process.GetProcessesByName("dns-sd.exe"))
             {
@@ -28,8 +27,10 @@ namespace LanPartyHub
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId);
-            doomWindow.Owner = Application.Current.MainWindow;
+            var doomWindow = new Doom2Window(this, (e.Source as GameImage).GameId)
+            {
+                Owner = Application.Current.MainWindow
+            };
             doomWindow.Show();
             Hide();
         }
@@ -39,12 +40,12 @@ namespace LanPartyHub
             var image = (GameImage)e.Source;
             var game = (Game)image.DataContext;
             // Standard Startup - uses StdGameWindow
-            if (game.StartupType == eStartupType.Standard)
+            if (game.StartupType == EStartupType.Standard)
             {
                 StdGame_MouseDown(sender, e);
             }
             // Custom Startup - uses different game window
-            else if (game.StartupType == eStartupType.Custom)
+            else if (game.StartupType == EStartupType.Custom)
             {
                 Doom2MouseDown(sender, e);
             }

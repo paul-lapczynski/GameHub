@@ -10,7 +10,7 @@ using System.Windows;
 namespace LanPartyHub
 {
     /// <summary>
-    /// Interaction logic for War2Window.xaml
+    /// Interaction logic for DOSBoxConfig.xaml
     /// </summary>
     public partial class DOSBoxConfigWindow : Window
     {
@@ -20,7 +20,7 @@ namespace LanPartyHub
             _main = main;
             InitializeComponent();
             DOSBoxCPath.Text = ApplicationManager.Settings.VirtualDOSBoxCDrivePath;
-            listGames.ItemsSource = ApplicationManager.Settings.Games.ToList();
+            listGames.ItemsSource = GameManager.Settings.Games.ToList();
         }
 
         private void Unload(object sender, RoutedEventArgs e)
@@ -58,7 +58,8 @@ namespace LanPartyHub
                 newGame.FolderPath = FolderName;
                 newGame.ExecutableName = FileName;
                 newGame.GameId = Guid.NewGuid().ToString();
-                newGame.StartupType = Enumerations.Game.eStartupType.Standard;
+                newGame.GameSettings = new List<KeyValue>();
+                newGame.StartupType = Enumerations.Game.EStartupType.Standard;
             }
 
             if (!string.IsNullOrEmpty(newGame.Name))
@@ -80,10 +81,10 @@ namespace LanPartyHub
                 //Update games list
                 if (!string.IsNullOrEmpty(newGame.ImagePath))
                 {
-                    ApplicationManager.Settings.Games.Add(newGame);
-                    ApplicationManager.SaveSettings();
-                    _main.icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
-                    listGames.ItemsSource = ApplicationManager.Settings.Games.ToList();
+                    GameManager.Settings.Games.Add(newGame);
+                    GameManager.SaveSettings();
+                    _main.icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
+                    listGames.ItemsSource = GameManager.Settings.Games.ToList();
                 }
             }
             
@@ -93,10 +94,10 @@ namespace LanPartyHub
         {
             Game game = new Game();
             game = (Game)listGames.SelectedItem;
-            ApplicationManager.Settings.Games.Remove(game);
-            ApplicationManager.SaveSettings();
-            _main.icGamesList.ItemsSource = ApplicationManager.Settings.Games.ToList();
-            listGames.ItemsSource = ApplicationManager.Settings.Games.ToList();
+            GameManager.Settings.Games.Remove(game);
+            GameManager.SaveSettings();
+            _main.icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
+            listGames.ItemsSource = GameManager.Settings.Games.ToList();
         }
     }
 }
