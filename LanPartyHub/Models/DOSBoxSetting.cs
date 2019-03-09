@@ -26,5 +26,16 @@ namespace LanPartyHub.Models
         /// Desription of the DOSBox setting
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// The default value that DOSBox uses
+        /// </summary>
+        public string DefaultValue { get; set; }
+
+        /// <summary>
+        /// The Section that this DOSBox setting belongs to
+        /// Example: "[sdl]"
+        /// </summary>
+        public string Section { get; set; }
     }
 }
