@@ -14,7 +14,7 @@ namespace LanPartyHub.Models
         /// DOSBox setting
         /// Example: fullscreen 
         /// </summary>
-        public string Key { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Available option values to set the DOSBox setting
