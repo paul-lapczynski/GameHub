@@ -114,6 +114,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Models\DOSBox\DOSBoxConfigSection.cs" />
+    <Compile Include="Models\DOSBox\DOSBoxConfigSettings.cs" />
     <Compile Include="Models\MultiplayerOptions.cs" />
     <Page Include="DOSBoxConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +237,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Games.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DOSBoxConfigSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
