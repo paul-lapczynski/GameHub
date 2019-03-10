@@ -163,53 +163,271 @@
         }
       ]
     },
-
-
-
-
-
-
-
     {
-      "Name": "mpu401",
-      "Values": [ "intelligent", "uart", "none" ],
-      "Description": "Specifies which type of MIDI Processing Unit to emulate. Default is intelligent.",
-      "DefaultValue": ""
+      "Name": "[midi]",
+      "Settings": [
+        {
+          "Name": "mpu401",
+          "Values": [ "intelligent", "uart", "none" ],
+          "Description": "Specifies which type of MIDI Processing Unit to emulate. Default is intelligent.",
+          "DefaultValue": "intelligent"
+        },
+        {
+          "Name": "mididevice",
+          "Values": [ "default", "win32", "alsa", "oss", "coreaudio", "coremidi", "none" ],
+          "Description": "which MIDI interface to use. As DOSBox currently does not emulate MIDI, but instead passes it through to an interface that does give MIDI playback support, this setting tells DOSBox which interface to pass MIDI data through to. Default is default.",
+          "DefaultValue": "default"
+        },
+        {
+          "Name": "midiconfig",
+          "Values": [ "" ],
+          "Description": "which MIDI interface to use. As DOSBox currently does not emulate MIDI, but instead passes it through to an interface that does give MIDI playback support, this setting tells DOSBox which interface to pass MIDI data through to. Default is default.",
+          "DefaultValue": ""
+        }
+      ]
     },
     {
-      "Name": "mididevice",
-      "Values": [ "default", "win32", "alsa", "oss", "coreaudio", "coremidi", "none" ],
-      "Description": "which MIDI interface to use. As DOSBox currently does not emulate MIDI, but instead passes it through to an interface that does give MIDI playback support, this setting tells DOSBox which interface to pass MIDI data through to. Default is default.",
-      "DefaultValue": ""
+      "Name": "[sblaster]",
+      "Settings": [
+        {
+          "Name": "sbtype",
+          "Values": [ "sb1", "sb2", "sbpro1", "sbpro2", "sb16", "gb", "none" ],
+          "Description": "Type of Soundblaster to emulate. gb is Gameblaster.",
+          "DefaultValue": "sb16"
+        },
+        {
+          "Name": "sbbase",
+          "Values": [ "220", "240", "260", "280", "2a0", "2c0", "2e0", "300" ],
+          "Description": "The IO address of the soundblaster",
+          "DefaultValue": "220"
+        },
+        {
+          "Name": "irq",
+          "Values": [ "7", "5", "3", "9", "10", "11", "12" ],
+          "Description": "The IRQ number of the soundblaster",
+          "DefaultValue": "7"
+        },
+        {
+          "Name": "dma",
+          "Values": [ "1", "5", "0", "3", "6", "7" ],
+          "Description": "The DMA number of the soundblaster",
+          "DefaultValue": "1"
+        },
+        {
+          "Name": "hdma",
+          "Values": [ "1", "5", "0", "3", "6", "7" ],
+          "Description": "The High DMA number of the soundblaster",
+          "DefaultValue": "5"
+        },
+        {
+          "Name": "sbmixer",
+          "Values": [ "true", "false" ],
+          "Description": "Allow the soundblaster mixer to modify the DOSBox mixer",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "oplmode",
+          "Values": [ "auto", "cms", "opl2", "dualopl2", "opl3", "none" ],
+          "Description": "Type of OPL emulation. On 'auto' the mode is determined by sblaster type. All OPL modes are Adlib-compatible, except for 'cms'.",
+          "DefaultValue": "auto"
+        },
+        {
+          "Name": "oplemu",
+          "Values": [ "default", "compat", "fast" ],
+          "Description": "Provider for the OPL emulation. compat might provide better quality (see oplrate as well).",
+          "DefaultValue": "default"
+        },
+        {
+          "Name": "oplrate",
+          "Values": [ "44100", "49716", "48000", "32000", "22050", "16000", "11025", "8000" ],
+          "Description": "Sample rate of OPL music emulation. Use 49716 for highest quality (set the mixer rate accordingly).",
+          "DefaultValue": "44100"
+        }
+      ]
     },
     {
-      "Name": "xms",
-      "Values": [ "true", "false" ],
-      "Description": "Allow application programming interface called the eXtended Memory Specification. Default is true.",
-      "DefaultValue": ""
+      "Name": "[gus]",
+      "Settings": [
+        {
+          "Name": "gus",
+          "Values": [ "true", "false" ],
+          "Description": "Enable the Gravis Ultrasound emulation.",
+          "DefaultValue": "false"
+        },
+        {
+          "Name": "gusrate",
+          "Values": [ "44100", "48000", "32000", "22050", "16000", "11025", "8000", "49716" ],
+          "Description": "Sample rate of Ultrasound emulation.",
+          "DefaultValue": "44100"
+        },
+        {
+          "Name": "gusbase",
+          "Values": [ "240", "220", "260", "280", "2a0", "2c0", "2e0", "300" ],
+          "Description": "The IO base address of the Gravis Ultrasound.",
+          "DefaultValue": "240"
+        },
+        {
+          "Name": "gusirq",
+          "Values": [ "5", "3", "7", "9", "10", "11", "12" ],
+          "Description": "Enable the Gravis Ultrasound emulation.",
+          "DefaultValue": "5"
+        },
+        {
+          "Name": "gusdma",
+          "Values": [ "3", "0", "1", "5", "6", "7 " ],
+          "Description": "Enable the Gravis Ultrasound emulation.",
+          "DefaultValue": "3"
+        },
+        {
+          "Name": "ultradir",
+          "Values": [ "C:\\ULTRASND" ],
+          "Description": "Enable the Gravis Ultrasound emulation.",
+          "DefaultValue": "C:\\ULTRASND"
+        }
+      ]
     },
     {
-      "Name": "ems",
-      "Values": [ "true", "false" ],
-      "Description": "Allow application programming interface called the Expanded Memory Specification. Default is true.",
-      "DefaultValue": ""
+      "Name": "[speaker]",
+      "Settings": [
+        {
+          "Name": "pcspeaker",
+          "Values": [ "true", "false" ],
+          "Description": "Enable PC-Speaker emulation.",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "pcrate",
+          "Values": [ "44100", "48000", "32000", "22050", "16000", "11025", "8000", "49716" ],
+          "Description": "Sample rate of the PC-Speaker sound generation.",
+          "DefaultValue": "44100"
+        },
+        {
+          "Name": "tandy",
+          "Values": [ "auto", "on", "off" ],
+          "Description": "Enable Tandy Sound System emulation. For 'auto', emulation is present only if machine is set to 'tandy'.",
+          "DefaultValue": "auto"
+        },
+        {
+          "Name": "tandyrate",
+          "Values": [ "44100", "48000", "32000", "22050", "16000", "11025", "8000", "49716" ],
+          "Description": "Enable PC-Speaker emulation.",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "disney",
+          "Values": [ "true", "false" ],
+          "Description": "Enable PC-Speaker emulation.",
+          "DefaultValue": "true"
+        }
+      ]
     },
     {
-      "Name": "umb",
-      "Values": [ "true", "false" ],
-      "Description": "Allow access to the Upper Memory Blocks . Default is true.",
-      "DefaultValue": ""
+      "Name": "[joystick]",
+      "Settings": [
+        {
+          "Name": "joysticktype",
+          "Values": [ "auto", "2axis", "4axis", "4axis_2", "fcs", "ch", "none" ],
+          "Description": "Type of joystick to emulate: auto (default), none,",
+          "DefaultValue": "false"
+        },
+        {
+          "Name": "timed",
+          "Values": [ "true", "false" ],
+          "Description": "enable timed intervals for axis. Experiment with this option, if your joystick drifts (away).",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "autofire",
+          "Values": [ "true", "false" ],
+          "Description": "Continuously fires as long as you keep the button pressed.",
+          "DefaultValue": "false"
+        },
+        {
+          "Name": "swap34",
+          "Values": [ "true", "false" ],
+          "Description": "Swap the 3rd and the 4th axis. Can be useful for certain joysticks.",
+          "DefaultValue": "false"
+        },
+        {
+          "Name": "buttonwrap",
+          "Values": [ "true", "false" ],
+          "Description": "Enable button wrapping at the number of emulated buttons.",
+          "DefaultValue": "false"
+        }
+      ]
     },
     {
-      "Name": "keyboardlayout",
-      "Values": [ "auto", "none", "XY" ],
-      "Description": "Keyboard layout setting. Default is auto.",
-      "DefaultValue": ""
+      "Name": "[serial]",
+      "Settings": [
+        {
+          "Name": "serial1",
+          "Values": [ "dummy", "disabled", "modem", "nullmodem", "directserial" ],
+          "Description": "Set type of device connected to com port. (THIS SETTING DOES NOT WORK IN GAME HUB [yet...])",
+          "DefaultValue": "dummy"
+        },
+        {
+          "Name": "serial2",
+          "Values": [ "dummy", "disabled", "modem", "nullmodem", "directserial" ],
+          "Description": "Set type of device connected to com port. (THIS SETTING DOES NOT WORK IN GAME HUB [yet...])",
+          "DefaultValue": "dummy"
+        },
+        {
+          "Name": "serial3",
+          "Values": [ "dummy", "disabled", "modem", "nullmodem", "directserial" ],
+          "Description": "Set type of device connected to com port. (THIS SETTING DOES NOT WORK IN GAME HUB [yet...])",
+          "DefaultValue": "disabled"
+        },
+        {
+          "Name": "serial4",
+          "Values": [ "dummy", "disabled", "modem", "nullmodem", "directserial" ],
+          "Description": "Set type of device connected to com port. (THIS SETTING DOES NOT WORK IN GAME HUB [yet...])",
+          "DefaultValue": "disabled"
+        }
+      ]
     },
     {
-      "Name": "ipx",
-      "Values": [ "true", "false" ],
-      "Description": "Enable or disable DOSBox IPX emulation. Default is false."
+      "Name": "[dos]",
+      "Settings": [
+        {
+          "Name": "xms",
+          "Values": [ "true", "false" ],
+          "Description": "Allow application programming interface called the eXtended Memory Specification. Default is true.",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "ems",
+          "Values": [ "true", "false" ],
+          "Description": "Allow application programming interface called the Expanded Memory Specification. Default is true.",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "umb",
+          "Values": [ "true", "false" ],
+          "Description": "Allow access to the Upper Memory Blocks . Default is true.",
+          "DefaultValue": "true"
+        },
+        {
+          "Name": "keyboardlayout",
+          "Values": [ "auto", "none", "XY" ],
+          "Description": "Keyboard layout setting. Default is auto.",
+          "DefaultValue": "auto"
+        }
+      ]
+    },
+    {
+      "Name": "[ipx]",
+      "Settings": [
+        {
+          "Name": "ipx",
+          "Values": [ "true", "false" ],
+          "Description": "Enable or disable DOSBox IPX emulation. Default is false.",
+          "DefaultValue": "false"
+        }
+      ]
+    },
+    {
+      "Name": "[autoexec]",
+      "Settings": []
     }
   ]
 }
