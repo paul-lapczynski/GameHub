@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="LanPartyHub.DOSBoxSettingCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LanPartyHub"
+             mc:Ignorable="d" Height="100" Width="250">
+    <Grid Margin="0,0,0,0">
+        <ComboBox Name="OptionsCombo" Margin="0,0,0,0" VerticalAlignment="Center">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBox">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        <Label Name="OptionLabel" Content="Option" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" VerticalContentAlignment="Center" />
+        <TextBlock Name="Description" FontSize="8px" Foreground="#000000" HorizontalAlignment="Left" Margin="0,66,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="34" Width="250">
+        </TextBlock>
+    </Grid>
+</UserControl>

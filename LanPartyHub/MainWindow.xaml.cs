@@ -17,12 +17,15 @@ namespace LanPartyHub
         public MainWindow()
         {
             InitializeComponent();
-            icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
+            //icGamesList.ItemsSource = GameManager.Settings.Games.ToList();
 
             foreach (var process in Process.GetProcessesByName("dns-sd.exe"))
             {
                 process.Kill();
             }
+
+            var gg = new GameConfigv2();
+            gg.Show();
         }
 
         private void Doom2MouseDown(object sender, MouseButtonEventArgs e)

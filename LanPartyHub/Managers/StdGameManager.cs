@@ -21,7 +21,7 @@ namespace LanPartyHub.Managers
                 ExeFolderPath = gameSettings.FolderPath,
                 ExeName = gameSettings.ExecutableName,
                 Fullscreen = false,
-                GameOptions = gameSettings.GameSettings
+                //GameOptions = gameSettings.GameSettings
 
             };
         }

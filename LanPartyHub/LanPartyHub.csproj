@@ -59,18 +59,25 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net46\System.Reactive.Core.dll</HintPath>
@@ -89,6 +96,7 @@
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -110,16 +118,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DOSBoxSettingCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="DOSBoxSettingCard.xaml.cs">
+      <DependentUpon>DOSBoxSettingCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GameConfigv2.xaml.cs">
+      <DependentUpon>GameConfigv2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\DOSBox\DOSBoxConfigSection.cs" />
     <Compile Include="Models\DOSBox\DOSBoxConfigSettings.cs" />
+    <Compile Include="Models\DOSBox\DOSBoxSettingOverride.cs" />
     <Compile Include="Models\MultiplayerOptions.cs" />
     <Page Include="DOSBoxConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GameConfigv2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MultiplayerHostWindow.xaml">
       <SubType>Designer</SubType>
@@ -142,13 +165,19 @@
     <Compile Include="Managers\GameManager.cs" />
     <Compile Include="Models\GameSettings.cs" />
     <Compile Include="Models\Connectivity\QueueChangeEventArgs.cs" />
-    <Compile Include="Models\DOSBoxSetting.cs" />
+    <Compile Include="Models\DOSBox\DOSBoxSetting.cs" />
     <Compile Include="Models\GameHubConnectionClient.cs" />
     <Compile Include="MultiplayerHostWindow.xaml.cs">
       <DependentUpon>MultiplayerHostWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MultiplayerClientWindow.xaml.cs">
       <DependentUpon>MultiplayerClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="test.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\GameHubClient.cs" />
     <Compile Include="Models\GameHubMessage.cs" />
@@ -183,7 +212,7 @@
     <Compile Include="GameImage.xaml.cs">
       <DependentUpon>GameImage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\JsonFileReader.cs" />
+    <Compile Include="Helpers\JsonFileHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -239,7 +268,7 @@
     <EmbeddedResource Include="Games.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="DOSBoxConfigSettings.json">
+    <EmbeddedResource Include="Content\DOSBoxConfigSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

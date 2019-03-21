@@ -1,4 +1,5 @@
 ﻿using LanPartyHub.Enumerations.Game;
+using LanPartyHub.Models.DOSBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,8 +43,13 @@ namespace LanPartyHub.Models
         public EStartupType StartupType { get; set; }
 
         /// <summary>
+        /// Startup type for an individual game
+        /// </summary>
+        public EProvider Provider { get; set; }
+
+        /// <summary>
         /// DOSBox Settings individual game
         /// </summary>
-        public List<KeyValue> GameSettings { get; set; }
+        public List<DOSBoxSettingOverride> GameSettings { get; set; }
     }
 }
