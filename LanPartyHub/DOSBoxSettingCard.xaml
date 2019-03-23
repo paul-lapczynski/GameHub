@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="LanPartyHub.DOSBoxSettingCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LanPartyHub"
+             mc:Ignorable="d" Height="100" Width="250">
+    <Grid Margin="0,0,0,0">
+        <ComboBox SelectedValue="{Binding SelectedValue}" ItemsSource="{Binding Values}" SelectionChanged="OptionsCombo_SelectionChanged" Name="OptionsCombo" Margin="0,0,0,0" VerticalAlignment="Center">
+        </ComboBox>
+        <Label Name="OptionLabel" Content="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="39" Width="72" VerticalContentAlignment="Center" />
+        <TextBlock Text="{Binding Description}" Name="Description" FontSize="8px" Foreground="#cfcfcf" HorizontalAlignment="Left" Margin="0,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="250">
+        </TextBlock>
+    </Grid>
+</UserControl>

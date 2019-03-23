@@ -4,6 +4,6 @@ namespace LanPartyHub.Models
 {
     public class GameSettings
     {       
-        public List<Game> Games { get; set; }
+        public List<Game>  Games { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace LanPartyHub
             {
                 Owner = Application.Current.MainWindow
             };
+
             doomWindow.Show();
             Hide();
         }
@@ -45,7 +46,7 @@ namespace LanPartyHub
                 StdGame_MouseDown(sender, e);
             }
             // Custom Startup - uses different game window
-            else if (game.StartupType == EStartupType.Custom)
+            else if (game.StartupType == EStartupType.Doom)
             {
                 Doom2MouseDown(sender, e);
             }

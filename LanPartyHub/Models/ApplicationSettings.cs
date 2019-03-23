@@ -2,6 +2,7 @@
 
 namespace LanPartyHub.Models
 {
+    // TODO
     public class ApplicationSettings
     {       
         public string VirtualDOSBoxCDrivePath { get; set; }

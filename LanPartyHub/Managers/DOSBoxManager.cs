@@ -1,23 +1,62 @@
-﻿using LanPartyHub.Models;
+﻿using LanPartyHub.Helpers;
+using LanPartyHub.Models;
 using LanPartyHub.Models.DOSBox;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 namespace LanPartyHub.Managers
 {
     /// <summary>
-    /// DOSBox Version - 0.74
+    /// DOSBox Version - 0.74 - 2
     /// </summary>
     public class DOSBoxManager
     {
         private static readonly string exe = "DOSBox.exe";
         private static readonly string workingDirectory = Directory.GetCurrentDirectory() + @"\Content\DOSBox\";
         private static readonly string DOSBoxC = ApplicationManager.Settings.VirtualDOSBoxCDrivePath;
+        private static readonly string DefaultDOSBoxConfigJson = AppDomain.CurrentDomain.BaseDirectory + @"\Content\DOSBoxConfigSettings.json";
+        private static readonly string WorkingDOSBoxConfig = AppDomain.CurrentDomain.BaseDirectory + @"\Content\tempConfig.conf";
+
+        static private DOSBoxConfigSettings _settings;
+
+        static public DOSBoxConfigSettings DefaultSettings
+        {
+            get
+            {
+                if (_settings == null)
+                {
+                    LoadDefaultSettings();
+                }
+
+                return _settings;
+            }
+
+            private set
+            {
+                _settings = value;
+            }
+        }
 
         public DOSBoxManager()
         {
         }
-       
+
+        public static void LoadDefaultSettings()
+        {
+            try
+            {
+                DefaultSettings = JsonFileHelper.ReadAsObject<DOSBoxConfigSettings>(DefaultDOSBoxConfigJson);
+            }
+            catch (FileNotFoundException e)
+            {
+                throw e;
+            }
+        }
+
         public static Process StartDOSBox(DOSBoxOptions options)
         {
             return Process.Start(new ProcessStartInfo
@@ -46,14 +85,14 @@ namespace LanPartyHub.Managers
             var args = new StringBuilder();
 
             // Game config options
-            if(options.GameOptions != null)
+            if (options.GameOptions != null)
             {
                 foreach (KeyValue option in options.GameOptions)
                 {
                     args.Append(" -c \"SET " + option.Key + "=" + option.Value + "\" ");
                 }
 
-                foreach(KeyValue option in options.GameOptions)
+                foreach (KeyValue option in options.GameOptions)
                 {
                     if (option.Key == "fullscreen")
                     {
@@ -79,14 +118,71 @@ namespace LanPartyHub.Managers
             // Mount drive and start game
             args.Append(" -c \"C:\"");
             args.Append($"-c \"mount c '{DOSBoxC}\\{options.ExeFolderPath}'\"");
-            args.Append(" -c \"C:\"");      
-            args.Append($"-c \"{options.ExeName} {options.Arguments}\"");       
+            args.Append(" -c \"C:\"");
+            args.Append($"-c \"{options.ExeName} {options.Arguments}\"");
 
             // auto exit dosbox after exe
             //args.Append(" -c \"exit\"");
 
             return args.ToString();
-            
+        }
+
+        public static List<DOSBoxSettingForConfig> GetSettingsForGame(Game game, DOSBoxConfigSettings defaultSettings)
+        {
+            var overrideSettings = game.DOSBoxOverrides ?? new List<DOSBoxSettingOverride>();
+
+            var merged = from ds in defaultSettings.Sections.SelectMany(section => section.Settings)
+                         join os in overrideSettings on ds.Name equals os.Name
+                         into temp
+                         from joined in temp.DefaultIfEmpty()
+                         select new DOSBoxSettingForConfig
+                         {
+                             DefaultValue = ds.DefaultValue,
+                             Description = ds.Description,
+                             Name = ds.Name,
+                             Section = ds.Section,
+                             SelectedValue = joined != null ? joined.SelectedValue : ds.DefaultValue,
+                             Values = ds.Values
+                         };
+
+            return merged.ToList();
+        }
+
+        public string BuildDOSBoxConfigFile(DOSBoxConfigSettings defaultSettings, List<DOSBoxSettingOverride> overrideSettings)
+        {
+            var configFileString =
+                from s in defaultSettings.Sections
+                let settings =
+                    from setting in s.Settings
+                    join ljos in (overrideSettings ?? new List<DOSBoxSettingOverride>()) on setting.Name equals ljos.Name
+                    into temp
+                    from joined in temp.DefaultIfEmpty()
+                    select $"{setting.Name}={(joined != null ? joined.SelectedValue : setting.DefaultValue)}"
+                select $@"{s.Name}{Environment.NewLine}{string.Join(Environment.NewLine, settings.ToList())}{Environment.NewLine}";
+
+            return string.Join(Environment.NewLine, configFileString);
+        }
+
+        public void WriteDOSBoxConfigFile(string configFile)
+        {
+            File.WriteAllText(WorkingDOSBoxConfig, configFile);
+        }
+
+        public bool CreatedConfigFileForGame(List<DOSBoxSettingOverride> overrideSettings)
+        {
+            var defaultSettings = JsonConvert.DeserializeObject<DOSBoxConfigSettings>(File.ReadAllText(DefaultDOSBoxConfigJson));
+
+            var config = BuildDOSBoxConfigFile(defaultSettings, overrideSettings);
+
+            try
+            {
+                WriteDOSBoxConfigFile(config);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace LanPartyHub
             _main = main;
             InitializeComponent();
             DOSBoxCPath.Text = ApplicationManager.Settings.VirtualDOSBoxCDrivePath;
-            listGames.ItemsSource = GameManager.Settings.Games.ToList();
+            //listGames.ItemsSource = GameManager.Settings.Games.ToList();
         }
 
         private void Unload(object sender, RoutedEventArgs e)
@@ -58,7 +58,7 @@ namespace LanPartyHub
                 newGame.FolderPath = FolderName;
                 newGame.ExecutableName = FileName;
                 newGame.GameId = Guid.NewGuid().ToString();
-                newGame.GameSettings = new List<KeyValue>();
+                //newGame.GameSettings = new List<KeyValue>();
                 newGame.StartupType = Enumerations.Game.EStartupType.Standard;
             }
 

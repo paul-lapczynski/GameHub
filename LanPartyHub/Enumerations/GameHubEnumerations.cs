@@ -31,7 +31,7 @@ namespace LanPartyHub.Enumerations
         public enum EStartupType
         {
             Standard = 1,
-            Custom = 2
+            Doom = 2
         }
     }
 }

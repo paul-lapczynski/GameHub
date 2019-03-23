@@ -61,8 +61,11 @@ namespace LanPartyHub
 
         private void GameConfig_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var Window = new GameConfigWindow(this, _gameid);
-            Window.Owner = Application.Current.MainWindow;
+            //var Window = new GameConfigWindow(this, _gameid);
+            var Window = new GameConfigv2(_gameid)
+            {
+                Owner = this
+            };
             Window.Show();
             Hide();
         }
