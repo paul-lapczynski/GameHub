@@ -116,7 +116,7 @@ namespace LanPartyHub.Managers
             //}
 
             // Mount drive and start game
-            args.Append(" -c \"C:\"");
+            //args.Append(" -c \"C:\"");
             args.Append($"-c \"mount c '{DOSBoxC}\\{options.ExeFolderPath}'\"");
             args.Append(" -c \"C:\"");
             args.Append($"-c \"{options.ExeName} {options.Arguments}\"");

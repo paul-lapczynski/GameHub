@@ -28,7 +28,7 @@ namespace LanPartyHub.Managers
 
         static public void SaveSettings()
         {
-            var directory = Directory.GetCurrentDirectory() + @"\Settings.json";
+            var directory = Directory.GetCurrentDirectory() + @"..\..\..\Settings.json";
             try
             {
                 JsonFileHelper.CreateFileFromObject(directory, Settings);
@@ -41,7 +41,7 @@ namespace LanPartyHub.Managers
 
         private static void LoadAppSettings()
         {
-            var directory = Directory.GetCurrentDirectory() + @"\Settings.json";
+            var directory = Directory.GetCurrentDirectory() + @"..\..\..\Settings.json";
             
             try
             {

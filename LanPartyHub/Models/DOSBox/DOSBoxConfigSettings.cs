@@ -9,6 +9,8 @@ namespace LanPartyHub.Models
 {
     public class DOSBoxConfigSettings
     {
+        public string VirtualDOSBoxCDrive { get; set; }
+
         public List<DOSBoxConfigSection> Sections { get; set; }
     }
 }

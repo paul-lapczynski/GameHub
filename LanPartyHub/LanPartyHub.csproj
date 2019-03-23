@@ -174,12 +174,6 @@
     <Compile Include="MultiplayerClientWindow.xaml.cs">
       <DependentUpon>MultiplayerClientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="test.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="test.Designer.cs">
-      <DependentUpon>test.cs</DependentUpon>
-    </Compile>
     <Compile Include="Utilities\GameHubClient.cs" />
     <Compile Include="Models\GameHubMessage.cs" />
     <Compile Include="Utilities\GameHubMessageQueue.cs" />

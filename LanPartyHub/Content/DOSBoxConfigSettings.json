@@ -1,4 +1,5 @@
 ﻿{
+  "VirtualDOSBoxCDrive": "",
   "Sections": [
     {
       "Name": "[sdl]",

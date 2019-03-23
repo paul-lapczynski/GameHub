@@ -31,6 +31,7 @@ namespace LanPartyHub
         private void DOSBoxConfigSave(object sender, RoutedEventArgs e)
         {
             ApplicationManager.Settings.VirtualDOSBoxCDrivePath = DOSBoxCPath.Text.ToString();
+
             ApplicationManager.SaveSettings();
         }
 

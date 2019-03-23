@@ -42,7 +42,7 @@ namespace LanPartyHub
             }
             SettingDropdown.DisplayMemberPath = "Key";
             SettingDropdown.SelectedValuePath = "Key";
-            SettingDropdown.ItemsSource = ApplicationManager.Settings.DOSBoxSettings.ToList();
+            //SettingDropdown.ItemsSource = ApplicationManager.Settings.DOSBoxSettings.ToList();
 
  
         }
@@ -68,10 +68,10 @@ namespace LanPartyHub
         private void SettingsDropdown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = ((LanPartyHub.Models.DOSBoxSetting)SettingDropdown.SelectedItem).Name;
-            var item = ApplicationManager.Settings.DOSBoxSettings.First(DOSBoxSetting => DOSBoxSetting.Name == selected);
-            List<string> valuesList = item.Values;
-            ValueDropdown.ItemsSource = valuesList;
-            SettingDescription.Text = "Description: " + item.Description;
+            //var item = ApplicationManager.Settings.DOSBoxSettings.First(DOSBoxSetting => DOSBoxSetting.Name == selected);
+            //List<string> valuesList = item.Values;
+            //ValueDropdown.ItemsSource = valuesList;
+            //SettingDescription.Text = "Description: " + item.Description;
         }
 
         private void GameConfigAddSetting(object sender, RoutedEventArgs e)
