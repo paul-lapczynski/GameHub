@@ -22,33 +22,26 @@ namespace LanPartyHub
     /// </summary>
     public partial class DOSBoxSettingCard : UserControl
     {
-        private DOSBoxSettingOverride _setting;
+        public static readonly DependencyProperty SettingProperty = DependencyProperty.Register("Setting", typeof(DOSBoxSettingForConfig), typeof(DOSBoxSettingCard), new PropertyMetadata());
+
+        public DOSBoxSettingForConfig Setting
+        {
+            get { return (DOSBoxSettingForConfig)GetValue(SettingProperty); }
+            set { SetValue(SettingProperty, value); }
+
+        }
 
         public DOSBoxSettingCard()
         {
             InitializeComponent();
         }
 
-
-        public void Init(DOSBoxSettingOverride setting)
+        private void OptionsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _setting = setting;
-            Render(setting);
-        }
+            Setting.SelectedValue = (string)e.AddedItems[0];
 
-        private void Ready(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void Render(DOSBoxSettingOverride setting)
-        {
-            OptionLabel.Content = setting.Name;
-            OptionsCombo.DisplayMemberPath = "Value";
-            OptionsCombo.SelectedValuePath = "Value";
-
-            OptionsCombo.ItemsSource = setting.Values;
-            OptionsCombo.SelectedValue = setting.SelectedValue;
+            var binder = GetBindingExpression(SettingProperty);
+            binder.UpdateSource();
         }
     }
 }

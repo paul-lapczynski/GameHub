@@ -1,9 +1,11 @@
-﻿using LanPartyHub.Models;
+﻿using LanPartyHub.Managers;
+using LanPartyHub.Models;
 using LanPartyHub.Models.DOSBox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,29 +23,42 @@ namespace LanPartyHub
     /// </summary>
     public partial class GameConfigv2 : Window
     {
-        public GameConfigv2()
+        private string _gameId { get; set; }
+
+        public GameConfigv2(string gameId)
         {
             InitializeComponent();
-            Test();
+            Init(gameId);
+            Unloaded += Unload;
         }
 
-        public void Test()
+        public void Init(string gameId)
         {
-            var combo = new ComboBox();
-            combo.DisplayMemberPath = "Value";
-            combo.SelectedValuePath = "Key";
+            _gameId = gameId;
+            var game = GameManager.Settings.Games.First(g => g.GameId == gameId);
 
-            combo.ItemsSource = new List<KeyValue> { new KeyValue { Key = "GG", Value = "GG" } };
-
-            icSettingsList.ItemsSource = new List<DOSBoxSettingOverride> { new DOSBoxSettingOverride { }, new DOSBoxSettingOverride { }
-            , new DOSBoxSettingOverride { }, new DOSBoxSettingOverride { }, new DOSBoxSettingOverride { }, new DOSBoxSettingOverride { }, new DOSBoxSettingOverride { }};
+            icCards.ItemsSource = DOSBoxManager.GetSettingsForGame(game, DOSBoxManager.DefaultSettings);
         }
 
-        public void CardLoaded(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var card = (DOSBoxSettingCard)e.Source;
-            var setting = (DOSBoxSettingOverride)card.DataContext;
-            card.Init(setting);
+            var game = GameManager.Settings.Games.First(g => g.GameId == _gameId);
+
+            game.DOSBoxOverrides = icCards.ItemsSource.Cast<DOSBoxSettingForConfig>().Select(setting => new DOSBoxSettingOverride
+            {
+                Name = setting.Name,
+                SelectedValue = setting.SelectedValue,
+                Section = setting.Section
+            }).ToList();
+
+            GameManager.SaveSettings();
+
+            Close();
+        }
+
+        private void Unload(object sender, RoutedEventArgs e)
+        {
+            Owner.Show();
         }
     }
 }

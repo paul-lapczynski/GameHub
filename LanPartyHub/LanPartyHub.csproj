@@ -132,6 +132,7 @@
     <Compile Include="GameConfigv2.xaml.cs">
       <DependentUpon>GameConfigv2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DOSBox\DOSBoxSettingForConfig.cs" />
     <Compile Include="Models\DOSBox\DOSBoxConfigSection.cs" />
     <Compile Include="Models\DOSBox\DOSBoxConfigSettings.cs" />
     <Compile Include="Models\DOSBox\DOSBoxSettingOverride.cs" />

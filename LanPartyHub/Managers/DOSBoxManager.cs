@@ -1,4 +1,5 @@
-﻿using LanPartyHub.Models;
+﻿using LanPartyHub.Helpers;
+using LanPartyHub.Models;
 using LanPartyHub.Models.DOSBox;
 using Newtonsoft.Json;
 using System;
@@ -20,8 +21,40 @@ namespace LanPartyHub.Managers
         private static readonly string DefaultDOSBoxConfigJson = AppDomain.CurrentDomain.BaseDirectory + @"\Content\DOSBoxConfigSettings.json";
         private static readonly string WorkingDOSBoxConfig = AppDomain.CurrentDomain.BaseDirectory + @"\Content\tempConfig.conf";
 
+        static private DOSBoxConfigSettings _settings;
+
+        static public DOSBoxConfigSettings DefaultSettings
+        {
+            get
+            {
+                if (_settings == null)
+                {
+                    LoadDefaultSettings();
+                }
+
+                return _settings;
+            }
+
+            private set
+            {
+                _settings = value;
+            }
+        }
+
         public DOSBoxManager()
         {
+        }
+
+        public static void LoadDefaultSettings()
+        {
+            try
+            {
+                DefaultSettings = JsonFileHelper.ReadAsObject<DOSBoxConfigSettings>(DefaultDOSBoxConfigJson);
+            }
+            catch (FileNotFoundException e)
+            {
+                throw e;
+            }
         }
 
         public static Process StartDOSBox(DOSBoxOptions options)
@@ -92,6 +125,27 @@ namespace LanPartyHub.Managers
             //args.Append(" -c \"exit\"");
 
             return args.ToString();
+        }
+
+        public static List<DOSBoxSettingForConfig> GetSettingsForGame(Game game, DOSBoxConfigSettings defaultSettings)
+        {
+            var overrideSettings = game.DOSBoxOverrides ?? new List<DOSBoxSettingOverride>();
+
+            var merged = from ds in defaultSettings.Sections.SelectMany(section => section.Settings)
+                         join os in overrideSettings on ds.Name equals os.Name
+                         into temp
+                         from joined in temp.DefaultIfEmpty()
+                         select new DOSBoxSettingForConfig
+                         {
+                             DefaultValue = ds.DefaultValue,
+                             Description = ds.Description,
+                             Name = ds.Name,
+                             Section = ds.Section,
+                             SelectedValue = joined != null ? joined.SelectedValue : ds.DefaultValue,
+                             Values = ds.Values
+                         };
+
+            return merged.ToList();
         }
 
         public string BuildDOSBoxConfigFile(DOSBoxConfigSettings defaultSettings, List<DOSBoxSettingOverride> overrideSettings)

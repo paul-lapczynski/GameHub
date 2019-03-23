@@ -1,5 +1,6 @@
 ﻿using LanPartyHub.Helpers;
 using LanPartyHub.Models;
+using System;
 using System.IO;
 
 namespace LanPartyHub.Managers
@@ -14,7 +15,7 @@ namespace LanPartyHub.Managers
             {
                 if (_settings == null)
                 {
-                    LoadAppSettings();
+                    LoadGameSettings();
                 }
 
                 return _settings;
@@ -28,20 +29,20 @@ namespace LanPartyHub.Managers
 
         static public void SaveSettings()
         {
-            var directory = Directory.GetCurrentDirectory() + @"\Games.json";
+            var directory = Directory.GetCurrentDirectory() + @"..\..\..\Games.json";
             try
             {
                 JsonFileHelper.CreateFileFromObject(directory, Settings);
             }
             catch
             {
-                
             }
         }
 
-        private static void LoadAppSettings()
+        private static void LoadGameSettings()
         {
-            var directory = Directory.GetCurrentDirectory() + @"\Games.json";
+            var directory = Directory.GetCurrentDirectory() + @"..\..\..\Games.json";
+            var gg = AppDomain.CurrentDomain.BaseDirectory;
             
             try
             {

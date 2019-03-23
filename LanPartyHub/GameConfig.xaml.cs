@@ -27,7 +27,7 @@ namespace LanPartyHub
             InitializeComponent();
             GamePath.Text = _game.FolderPath + "\\" + _game.ExecutableName;
             GameImagePath.Text = _game.ImagePath;
-            if (_game.GameSettings != null && _game.GameSettings.Count > 0)
+            if (_game.DOSBoxOverrides != null && _game.DOSBoxOverrides.Count > 0)
             {
                 List<KeyValue> settings = new List<KeyValue>();
                 //_game.GameSettings.ToList().ForEach(item =>

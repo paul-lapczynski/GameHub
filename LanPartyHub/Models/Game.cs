@@ -1,11 +1,6 @@
 ﻿using LanPartyHub.Enumerations.Game;
 using LanPartyHub.Models.DOSBox;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace LanPartyHub.Models
 {
@@ -50,6 +45,6 @@ namespace LanPartyHub.Models
         /// <summary>
         /// DOSBox Settings individual game
         /// </summary>
-        public List<DOSBoxSettingOverride> GameSettings { get; set; }
+        public List<DOSBoxSettingOverride> DOSBoxOverrides { get; set; }
     }
 }
